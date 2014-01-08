@@ -1,0 +1,13 @@
+defaults: &defaults
+  adapter: postgresql
+  username: nulogy
+  password: Nulogy4Ever
+  host: localhost
+
+development:
+  <<: *defaults
+  database: roses_development
+
+test:
+  <<: *defaults
+  database: roses_test
