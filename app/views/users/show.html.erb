@@ -1,0 +1,37 @@
+<% content_for :head do %>
+  <%= javascript_include_tag "http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.5.2/underscore-min.js" %>
+  <%= javascript_include_tag "https://ajax.googleapis.com/ajax/libs/angularjs/1.2.7/angular.min.js" %>
+  <%= javascript_include_tag "controllers/index_controller.js" %>
+<% end %>
+<div ng-app>
+  <div ng-controller='IndexCtrl'>
+    <div class='index'>
+      <ul>
+        <li><a href='#' ng-click='showWinnerPick()'>Winner pick</a></li>
+        <li ng-repeat='week in weeks'>
+          <a href='#' ng-click='showWeek(week)'>{{week.name}}</a>
+        </li>
+      </ul>
+    </div>
+    <div class='content'>
+      <div class='pick-winner' ng-show="show == 'winner'">
+        <form ng-controller='PickWinnerCtrl'>
+          <label for='select-winner'>Who do you think will win?</label> 
+          <select id='select-winner' ng-model="winner" ng-options="c.name for c in contestants"></select>
+        </form>
+      </div>
+
+      <div ng-show="show == 'week'" ng-controller='WeekCtrl'>
+        {{week.name}}
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  function WeekCtrl($scope) {
+  }
+
+  function PickWinnerCtrl($scope) {
+  }
+</script>
