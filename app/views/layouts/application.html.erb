@@ -4,15 +4,24 @@
   <title>Will you accept this rose?</title>
   <%= javascript_include_tag :application %>
   <%= csrf_meta_tags %>
+  <%= yield :head %>
 </head>
 <body>
   <% if !current_user %>
     <%= link_to "Sign in with Google", user_omniauth_authorize_path(:google_oauth2) %>
   <% else %>
-    <span>Will you accept this rose, <%= current_user.name %>?</span> | <span> <%= link_to "Sign out", destroy_user_session_path, method: :delete %> </span>
+    <header>
+      <div>
+        <span>Will you accept this rose, <%= current_user.name %>?</span> | <span> <%= link_to "Sign out", destroy_user_session_path, method: :delete %> </span>
+      </div>
+    </header>
+
+    <br/>
+    <%= yield %>
   <% end %>
 
-<%= yield %>
+
+
 
 </body>
 </html>
