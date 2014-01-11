@@ -8,17 +8,23 @@ var weeks = [
 var contestants = [
   {id: 1, name: 'Andi'},
   {id: 2, name: 'Clare'},
-  {id: 2, name: 'Chelsie'},
-  {id: 2, name: 'Sharleen'}
+  {id: 3, name: 'Chelsie'},
+  {id: 4, name: 'Sharleen'}
+]
+
+var eligibleContestants = [
+  {id: 1, name: 'Andi'},
+  {id: 2, name: 'Clare'},
+  {id: 3, name: 'Chelsie'}
 ]
 
 var user = {
   winner_id: 2,
   picks: [
-    {week_id: 1, contestant_id: 1, will_get_rose: true, rose: undefined},
-    {week_id: 1, contestant_id: 2, will_get_rose: true, rose: undefined},
-    {week_id: 1, contestant_id: 3, will_get_rose: false, rose: undefined},
-    {week_id: 1, contestant_id: 4, will_get_rose: false, rose: undefined},
+    {id: 1, week_id: 1, order: 1, contestant_id: 1, will_get_rose: true, rose: undefined},
+    {id: 2, week_id: 1, order: 2, contestant_id: 2, will_get_rose: true, rose: undefined},
+    {id: 3, week_id: 1, order: 3, contestant_id: 3, will_get_rose: false, rose: undefined},
+    {id: 4, week_id: 1, order: 4, contestant_id: 4, will_get_rose: false, rose: undefined},
   ]
 }
 
@@ -26,6 +32,7 @@ function IndexCtrl($scope) {
   $scope.weeks = weeks
   $scope.user = user
   $scope.contestants = contestants
+  $scope.eligibleContestants = eligibleContestants
 
   $scope.showWeek = function(week) {
     $scope.week = week
@@ -33,7 +40,6 @@ function IndexCtrl($scope) {
   }
 
   $scope.showWinnerPick = function() {
-    $scope.winner = _.find($scope.contestants, function(contestant) { return contestant.id == $scope.user.winner_id }) 
     $scope.show = 'winner'
   }
 }

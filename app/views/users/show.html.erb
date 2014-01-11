@@ -2,6 +2,8 @@
   <%= javascript_include_tag "http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.5.2/underscore-min.js" %>
   <%= javascript_include_tag "https://ajax.googleapis.com/ajax/libs/angularjs/1.2.7/angular.min.js" %>
   <%= javascript_include_tag "controllers/index_controller.js" %>
+  <%= javascript_include_tag "controllers/week_controller.js" %>
+  <%= javascript_include_tag "controllers/pick_winner_controller.js" %>
 <% end %>
 <div ng-app>
   <div ng-controller='IndexCtrl'>
@@ -14,24 +16,34 @@
       </ul>
     </div>
     <div class='content'>
-      <div class='pick-winner' ng-show="show == 'winner'">
+      <div class='pick-winner' ng-show="show == 'winner'" ng-controller="PickWinnerCtrl">
         <form ng-controller='PickWinnerCtrl'>
           <label for='select-winner'>Who do you think will win?</label> 
-          <select id='select-winner' ng-model="winner" ng-options="c.name for c in contestants"></select>
+          <select id='select-winner' ng-model="winner" ng-options="c.name for c in contestants" ng-change="updateWinnerPick(winner)"></select>
         </form>
       </div>
 
       <div ng-show="show == 'week'" ng-controller='WeekCtrl'>
-        {{week.name}}
+        Picks for: {{week.name}}
+        <table>
+          <tr>
+            <th>Order</th>
+            <th>Contestant</th>
+            <th>Will get rose</th>
+            <th>Will not get rose</th>
+            <th>Rose?</th>
+          </tr>
+          <tr ng-repeat="pick in user.picks">
+            <td>{{pick.order}}</td>
+            <td><select ng-model="pick.contestant" ng-options="c.name for c in eligibleContestants" ng-change="updatePick(pick)"></select></td>
+            <td><input ng-model="pick.will_get_rose" type='radio' name='{{pick.order}}_will_get_rose' value='true' ng-change="updatePick(pick)" /></td>
+            <td><input ng-model="pick.will_get_rose" type='radio' name='{{pick.order}}_will_get_rose' value='false' ng-change="updatePick(pick)" /></td>
+          </tr>
+        </table>
       </div>
     </div>
   </div>
 </div>
 
 <script>
-  function WeekCtrl($scope) {
-  }
-
-  function PickWinnerCtrl($scope) {
-  }
 </script>
