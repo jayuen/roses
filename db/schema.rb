@@ -11,14 +11,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140111054447) do
+ActiveRecord::Schema.define(version: 20140111064120) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "contestants", force: true do |t|
-    t.text "first_name"
-    t.text "last_name"
+    t.text    "first_name"
+    t.text    "last_name"
+    t.integer "season_id"
+    t.boolean "eliminated"
   end
 
   create_table "eligible_contestants", force: true do |t|
@@ -36,7 +38,8 @@ ActiveRecord::Schema.define(version: 20140111054447) do
   end
 
   create_table "seasons", force: true do |t|
-    t.text "name"
+    t.text    "name"
+    t.boolean "current"
   end
 
   create_table "users", force: true do |t|
@@ -70,6 +73,7 @@ ActiveRecord::Schema.define(version: 20140111054447) do
   create_table "weeks", force: true do |t|
     t.text    "name"
     t.integer "season_id"
+    t.boolean "locked",    default: true
   end
 
 end
