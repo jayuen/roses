@@ -13,10 +13,6 @@
       <%= link_to "Sign in with Google", user_omniauth_authorize_path(:google_oauth2) %>
     </header>
 
-    <div class='welcome'>
-      Will you accept this rose?
-    </div>
-
   <% else %>
     <header>
       <div>
@@ -25,11 +21,9 @@
     </header>
 
     <br/>
-    <%= yield %>
   <% end %>
 
-
-
+  <%= yield %>
 
 </body>
 </html>
