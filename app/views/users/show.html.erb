@@ -36,8 +36,8 @@
           <tr ng-repeat="pick in user.picks">
             <td>{{pick.order}}</td>
             <td><select ng-model="pick.contestant" ng-options="c.name for c in eligibleContestants" ng-change="updatePick(pick)"></select></td>
-            <td><input ng-model="pick.will_get_rose" type='radio' name='{{pick.order}}_will_get_rose' value='true' ng-change="updatePick(pick)" /></td>
-            <td><input ng-model="pick.will_get_rose" type='radio' name='{{pick.order}}_will_get_rose' value='false' ng-change="updatePick(pick)" /></td>
+            <td><input ng-model="pick.rose" type='radio' name='{{pick.order}}_rose' value='true' ng-change="updatePick(pick)" /></td>
+            <td><input ng-model="pick.rose" type='radio' name='{{pick.order}}_rose' value='false' ng-change="updatePick(pick)" /></td>
           </tr>
         </table>
       </div>
