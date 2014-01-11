@@ -21,10 +21,10 @@ var eligibleContestants = [
 var user = {
   winner_id: 2,
   picks: [
-    {id: 1, week_id: 1, order: 1, contestant_id: 1, will_get_rose: true, rose: undefined},
-    {id: 2, week_id: 1, order: 2, contestant_id: 2, will_get_rose: true, rose: undefined},
-    {id: 3, week_id: 1, order: 3, contestant_id: 3, will_get_rose: false, rose: undefined},
-    {id: 4, week_id: 1, order: 4, contestant_id: 4, will_get_rose: false, rose: undefined},
+    {id: 1, week_id: 1, order: 1, contestant_id: 1, rose: true},
+    {id: 2, week_id: 1, order: 2, contestant_id: 2, rose: true},
+    {id: 3, week_id: 1, order: 3, contestant_id: 3, rose: false},
+    {id: 4, week_id: 1, order: 4, contestant_id: 4, rose: false},
   ]
 }
 
