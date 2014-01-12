@@ -9,6 +9,7 @@ gem 'devise'
 gem 'omniauth-google-oauth2'
 gem 'pg'
 gem 'jquery-rails'
+gem 'active_model_serializers'
 
 
 # Gems used only for assets and not required
