@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140111064120) do
+ActiveRecord::Schema.define(version: 20140112062800) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -35,11 +35,13 @@ ActiveRecord::Schema.define(version: 20140111064120) do
     t.integer  "order"
     t.integer  "contestant_id"
     t.boolean  "rose"
+    t.integer  "user_id"
   end
 
   create_table "seasons", force: true do |t|
     t.text    "name"
     t.boolean "current"
+    t.integer "current_week_id"
   end
 
   create_table "users", force: true do |t|
