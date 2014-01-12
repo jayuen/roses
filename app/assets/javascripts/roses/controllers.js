@@ -1,3 +1,4 @@
+/*
 var weeks = [
   {id: 1, name: 'Week of January 6th'},
   {id: 2, name: 'Week of January 13th'},
@@ -28,12 +29,14 @@ var user = {
   ]
 }
 
+*/
 angular.module('roses.controllers', []).
   controller('IndexCtrl', function($scope) {
-    $scope.weeks = weeks
-    $scope.user = user
-    $scope.contestants = contestants
-    $scope.eligibleContestants = eligibleContestants
+    $scope.weeks = InitialData.weeks
+    $scope.user = InitialData.user
+    console.log($scope.user)
+    $scope.contestants = InitialData.contestants
+    $scope.eligibleContestants = InitialData.eligibleContestants
 
     $scope.showWeek = function(week) {
       $scope.week = week

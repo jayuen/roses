@@ -1,6 +1,6 @@
 class PicksController < ApplicationController
   def update
-    puts params[:pick]
+    Pick.find(params[:id]).update_attributes! params[:pick]
     render json: {}
   end
 end

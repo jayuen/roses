@@ -4,6 +4,15 @@
   <%= javascript_include_tag "roses/app.js" %>
   <%= javascript_include_tag "roses/services.js" %>
   <%= javascript_include_tag "roses/controllers.js" %>
+
+  <script>
+    var InitialData = {
+      weeks: <%= @weeks.to_json.html_safe %>,
+      user: <%= @user.to_json.html_safe %>,
+      contestants: <%= @contestants.to_json.html_safe %>,
+      eligibleContestants: <%= @eligibleContestants.to_json.html_safe %>
+    }
+  </script>
 <% end %>
 <div ng-app='roses'>
   <div ng-controller='IndexCtrl'>
