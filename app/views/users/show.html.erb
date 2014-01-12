@@ -1,11 +1,11 @@
 <% content_for :head do %>
   <%= javascript_include_tag "http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.5.2/underscore-min.js" %>
   <%= javascript_include_tag "https://ajax.googleapis.com/ajax/libs/angularjs/1.2.7/angular.min.js" %>
-  <%= javascript_include_tag "controllers/index_controller.js" %>
-  <%= javascript_include_tag "controllers/week_controller.js" %>
-  <%= javascript_include_tag "controllers/pick_winner_controller.js" %>
+  <%= javascript_include_tag "roses/app.js" %>
+  <%= javascript_include_tag "roses/services.js" %>
+  <%= javascript_include_tag "roses/controllers.js" %>
 <% end %>
-<div ng-app>
+<div ng-app='roses'>
   <div ng-controller='IndexCtrl'>
     <div class='index'>
       <ul>
