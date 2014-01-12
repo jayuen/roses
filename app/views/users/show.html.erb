@@ -8,9 +8,17 @@
   <script>
     var InitialData = {
       weeks: <%= @weeks.to_json.html_safe %>,
-      user: <%= @user.to_json.html_safe %>,
       contestants: <%= @contestants.to_json.html_safe %>,
-      eligibleContestants: <%= @eligibleContestants.to_json.html_safe %>
+      eligibleContestants: <%= @eligible_contestants.to_json.html_safe %>,
+      user: { 
+        winner_id: 2,
+        picks: [
+          {id: 1, week_id: 1, order: 1, contestant_id: 1, rose: true},
+          {id: 2, week_id: 1, order: 2, contestant_id: 2, rose: true},
+          {id: 3, week_id: 1, order: 3, contestant_id: 3, rose: false},
+          {id: 4, week_id: 1, order: 4, contestant_id: 4, rose: false},
+        ]
+      }
     }
   </script>
 <% end %>
