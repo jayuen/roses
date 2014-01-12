@@ -1,6 +1,7 @@
 class PicksController < ApplicationController
   def update
-    Pick.find(params[:id]).update_attributes! params[:pick]
+    pick_params = params.require(:pick).permit(:rose, :contestant_id)
+    Pick.find(params[:id]).update_attributes! pick_params
     render json: {}
   end
 end
