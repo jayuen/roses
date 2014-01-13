@@ -11,6 +11,7 @@ gem 'omniauth-google-oauth2'
 gem 'pg'
 gem 'jquery-rails'
 gem 'active_model_serializers'
+gem 'rails_serve_static_assets'
 
 
 # Gems used only for assets and not required
