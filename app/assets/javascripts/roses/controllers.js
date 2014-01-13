@@ -25,4 +25,12 @@ angular.module('roses.controllers', []).
     $scope.updatePick = function(pick) {
       PicksRepo.save(pick)
     }
+
+    $scope.picksForWeek = function(week) {
+      if (week === undefined)
+        return []
+      else
+        filtered = _.filter($scope.player.picks, function(pick) { return pick.week_id == week.id})
+        return _.sortBy(filtered, function(pick) { return pick.rose_order })
+    }
   }])
