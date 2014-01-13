@@ -31,7 +31,21 @@ angular.module('roses.controllers', []).
         return []
       } else {
         var filtered = _.filter($scope.player.picks, function(pick) { return pick.week_id == week.id})
-        return _.sortBy(filtered, function(pick) { return pick.rose_order })
+        var sorted = _.sortBy(filtered, function(pick) { return pick.rose_order })
+
+        function matchContestant(pick, contestants){
+          return _.find(contestants, function(contestant) {
+            if (pick.contestant) {
+              return pick.contestant.id === contestant.id   
+            }
+          })
+        }
+
+        _.each(sorted, function(pick) {
+          match = matchContestant(pick, $scope.eligibleContestants)
+          pick.contestant = match
+        })
+        return sorted
       }
     }
   }])
