@@ -34,13 +34,12 @@
 
       <div ng-show="show == 'week'" ng-controller='WeekCtrl'>
         Picks for: {{week.name}}
-        <table>
+        <table class='weekly-picks'>
           <tr>
             <th>Order</th>
             <th>Contestant</th>
-            <th>Will get rose</th>
-            <th>Will not get rose</th>
-            <th>Rose?</th>
+            <th>Will get rose?</th>
+            <th>Actual rose result</th>
           </tr>
           <tr ng-repeat="pick in picksForWeek(week)">
             <td>{{pick.rose_order}}</td>
