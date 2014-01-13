@@ -17,4 +17,10 @@ class PlayersController < ApplicationController
 
     @player_json = PlayersSerializer.new(player).to_json
   end
+
+  def update
+    player_params = params.require(:player).permit(:winner_id)
+    Player.find(params[:id]).update_attributes! player_params
+    render json: {}
+  end
 end

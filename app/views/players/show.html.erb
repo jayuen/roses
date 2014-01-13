@@ -28,7 +28,7 @@
       <div class='pick-winner' ng-show="show == 'winner'" ng-controller="PickWinnerCtrl">
         <form ng-controller='PickWinnerCtrl'>
           <label for='select-winner'>Who do you think will win?</label> 
-          <select id='select-winner' ng-model="winner" ng-options="c.name for c in contestants" ng-change="updateWinnerPick(winner)"></select>
+          <select id='select-winner' ng-model="player.winner" ng-options="c.name for c in contestants" ng-change="updateWinnerPick()"></select>
         </form>
       </div>
 

@@ -14,3 +14,15 @@ services.factory('PicksRepo', ['$http', function($http) {
     }
   }
 }])
+
+services.factory('PlayersRepo', ['$http', function($http) {
+  return {
+    save: function(player) {
+      var data = { player: { winner_id: player.winner.id} }
+
+      return $http.put('/players/' + player.id, data).then(function(result) {
+        return result.data
+      })
+    }
+  }
+}])

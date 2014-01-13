@@ -14,13 +14,13 @@ angular.module('roses.controllers', []).
       $scope.show = 'winner'
     }
   }).  
-  controller('PickWinnerCtrl', function($scope) {
-    $scope.winner = _.find($scope.contestants, function(contestant) { return contestant.id == $scope.player.winner_id }) 
+  controller('PickWinnerCtrl', ['$scope', 'PlayersRepo', function($scope, PlayersRepo) {
+    $scope.player.winner = _.find($scope.contestants, function(contestant) { return contestant.id == $scope.player.winner_id }) 
 
-    $scope.updateWinnerPick = function(winner) {
-      console.log(winner)
+    $scope.updateWinnerPick = function() {
+      PlayersRepo.save($scope.player)
     }
-  }).
+  }]).
   controller('WeekCtrl', ['$scope', 'PicksRepo', function($scope, PicksRepo) {
     $scope.updatePick = function(pick) {
       PicksRepo.save(pick)
