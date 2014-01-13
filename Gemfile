@@ -4,7 +4,6 @@ gem 'rails', '4.0.2'
 
 # Bundle edge Rails instead:
 
-gem 'sqlite3'
 gem 'devise'
 gem 'omniauth-google-oauth2'
 gem 'pg'
