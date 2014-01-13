@@ -5,7 +5,7 @@ services.factory('PicksRepo', ['$http', function($http) {
     save: function(pick) {
       var data = { pick: { rose: pick.rose} }
       if (pick.contestant) {
-        data.contestant_id = pick.contestant.id
+        data.pick.contestant_id = pick.contestant.id
       } 
 
       return $http.put('/picks/' + pick.id, data).then(function(result) {
