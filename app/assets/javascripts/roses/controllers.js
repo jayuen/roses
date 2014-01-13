@@ -27,10 +27,11 @@ angular.module('roses.controllers', []).
     }
 
     $scope.picksForWeek = function(week) {
-      if (week === undefined)
+      if (week === undefined) {
         return []
-      else
-        filtered = _.filter($scope.player.picks, function(pick) { return pick.week_id == week.id})
+      } else {
+        var filtered = _.filter($scope.player.picks, function(pick) { return pick.week_id == week.id})
         return _.sortBy(filtered, function(pick) { return pick.rose_order })
+      }
     }
   }])
