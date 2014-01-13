@@ -45,8 +45,7 @@
           <tr ng-repeat="pick in picksForWeek(week)">
             <td>{{pick.rose_order}}</td>
             <td><select ng-model="pick.contestant" ng-options="c.name for c in eligibleContestants" ng-change="updatePick(pick)"></select></td>
-            <td><input ng-model="pick.rose" type='radio' name='{{pick.rose_order}}_rose' value='true' ng-change="updatePick(pick)" /></td>
-            <td><input ng-model="pick.rose" type='radio' name='{{pick.rose_order}}_rose' value='false' ng-change="updatePick(pick)" /></td>
+            <td ng-class="{'rose': pick.rose, 'no-rose': !pick.rose}"><input ng-model="pick.rose" type="checkbox" ng-change="updatePick(pick)" ></td>
           </tr>
         </table>
       </div>
