@@ -10,7 +10,7 @@
       weeks: <%= @weeks.to_json.html_safe %>,
       contestants: <%= @contestants.to_json.html_safe %>,
       eligibleContestants: <%= @eligible_contestants.to_json.html_safe %>,
-      user: { 
+      player: { 
         winner_id: 2,
         picks: [
           {id: 1, week_id: 1, order: 1, contestant_id: 1, rose: true},
@@ -50,7 +50,7 @@
             <th>Will not get rose</th>
             <th>Rose?</th>
           </tr>
-          <tr ng-repeat="pick in user.picks">
+          <tr ng-repeat="pick in player.picks">
             <td>{{pick.order}}</td>
             <td><select ng-model="pick.contestant" ng-options="c.name for c in eligibleContestants" ng-change="updatePick(pick)"></select></td>
             <td><input ng-model="pick.rose" type='radio' name='{{pick.order}}_rose' value='true' ng-change="updatePick(pick)" /></td>

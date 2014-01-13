@@ -1,7 +1,7 @@
 angular.module('roses.controllers', []).
   controller('IndexCtrl', function($scope) {
     $scope.weeks = InitialData.weeks
-    $scope.user = InitialData.user
+    $scope.player = InitialData.player
     $scope.contestants = InitialData.contestants
     $scope.eligibleContestants = InitialData.eligibleContestants
 
@@ -15,7 +15,7 @@ angular.module('roses.controllers', []).
     }
   }).  
   controller('PickWinnerCtrl', function($scope) {
-    $scope.winner = _.find($scope.contestants, function(contestant) { return contestant.id == $scope.user.winner_id }) 
+    $scope.winner = _.find($scope.contestants, function(contestant) { return contestant.id == $scope.player.winner_id }) 
 
     $scope.updateWinnerPick = function(winner) {
       console.log(winner)

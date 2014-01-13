@@ -7,6 +7,9 @@ Roses::Application.routes.draw do
 
   resources :picks do
   end
+
+  resources :players do
+  end
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

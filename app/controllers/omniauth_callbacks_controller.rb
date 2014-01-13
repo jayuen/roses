@@ -12,6 +12,13 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
   end
 
   def after_sign_in_path_for(resource)
-    user_path(resource)
+    season = Season.where(current: true).first
+    player = season.players.where(user_id: resource.id).first
+
+    if player.nil?
+      player = Player.create! season_id: season.id, user_id: resource.id
+    end
+
+    player_path(player)
   end
 end

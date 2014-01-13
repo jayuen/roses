@@ -1,4 +1,4 @@
-class UsersController < ApplicationController
+class PlayersController < ApplicationController
   def show
     season = Season.where(current: true).first
     current_week_id = season.current_week_id
