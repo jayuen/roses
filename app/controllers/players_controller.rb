@@ -1,5 +1,4 @@
 class PlayersController < ApplicationController
-  before_filter :authenticate_user!
 
   def show
     player = Player.find(params[:id])
@@ -9,7 +8,7 @@ class PlayersController < ApplicationController
     @contestants = Contestant.where(season_id: season.id, eliminated: false)
 
     current_week_id = season.current_week_id
-    @eligible_contestants = EligibleContestant.where(week_id: current_week_id).map {|ec| ec.contestant }
+    @eligible_contestants = Contestant.eligible(season.id)
 
     if player.picks.empty?
       @eligible_contestants.each_with_index do |c, index|
