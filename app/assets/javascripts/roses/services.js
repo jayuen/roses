@@ -34,7 +34,7 @@ adminServices.factory('ContestantRepo', ['$http', function($http) {
     save: function(contestant) {
       var data = { contestant: { eliminated: contestant.eliminated} }
 
-      return $http.put('/contestant/' + contestant.id, data).then(function(result) {
+      return $http.put('/contestants/' + contestant.id, data).then(function(result) {
         return result.data
       })
     }
