@@ -26,3 +26,15 @@ services.factory('PlayersRepo', ['$http', function($http) {
     }
   }
 }])
+
+services.factory('ContestantRepo', ['$http', function($http) {
+  return {
+    save: function(contestant) {
+      var data = { contestant: { eliminated: contestant.eliminated} }
+
+      return $http.put('/contestant/' + contestant.id, data).then(function(result) {
+        return result.data
+      })
+    }
+  }
+}])

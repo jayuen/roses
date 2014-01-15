@@ -48,4 +48,9 @@ angular.module('roses.controllers', []).
         return sorted
       }
     }
+  }]).
+  controller('AdminCtrl', ['$scope', 'ContestantRepo', function($scope, ContestantRepo) {
+    $scope.updateContestant = function(contestant) {
+      ContestantRepo.save(contestant)
+    }
   }])
