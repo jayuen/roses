@@ -17,7 +17,9 @@
   <% else %>
     <header>
       <div>
-        <span>Will you accept this rose, <%= current_user.name %>?</span> | <span> <%= link_to "Sign out", destroy_user_session_path, method: :delete %> </span>
+        <span>Will you accept this rose, <%= current_user.name %>?</span> | 
+        <span> <%= link_to "Sign out", destroy_user_session_path, method: :delete %> </span> |
+        <span> <%= link_to "Admin", admin_path %> </span>
       </div>
     </header>
 
