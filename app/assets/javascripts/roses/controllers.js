@@ -65,5 +65,8 @@ angular.module('rosesAdmin.controllers', []).
       $scope.show = 'contestants'
     }
   }]).
+  controller('ContestantsCtrl', ['$scope', function($scope) {
+    $scope.contestants = InitialAdminData.contestants
+  }]).
   controller('WeeklyResultsCtrl', ['$scope', function($scope) {
   }])

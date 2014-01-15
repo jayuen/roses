@@ -20,5 +20,6 @@ class ApplicationController < ActionController::Base
   end
 
   def admin
+    @contestants = Contestant.where(season_id: @current_season.id)
   end
 end

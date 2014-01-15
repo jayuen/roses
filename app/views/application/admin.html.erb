@@ -1,6 +1,6 @@
 <% content_for :head do %>
   <script>
-    var InitialData = {
+    var InitialAdminData = {
       contestants: <%= @contestants.to_json.html_safe %>
     }
   </script>
@@ -16,6 +16,18 @@
       </ul>
     </div>
     <div class='content'>
+      <div ng-show="show == 'contestants'" ng-controller='ContestantsCtrl'>
+        <table class='contestants'>
+          <tr>
+            <th>Contestant</th>
+            <th>Eliminated?</th>
+          </tr>
+          <tr ng-repeat='c in contestants'>
+            <td>{{c.name}}</td>
+            <td><input ng-model="c.elminated" type='checkbox' ng-change='updateContestant(c)'></td>
+          </tr>
+        </table>
+      </div>
       <div ng-show="show == 'week'" ng-controller='WeeklyResultsCtrl'>
         Results for: {{week.name}}
         <table class='weekly-results'>
