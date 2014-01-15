@@ -27,7 +27,9 @@ services.factory('PlayersRepo', ['$http', function($http) {
   }
 }])
 
-services.factory('ContestantRepo', ['$http', function($http) {
+
+var adminServices = angular.module('rosesAdmin.services', [])
+adminServices.factory('ContestantRepo', ['$http', function($http) {
   return {
     save: function(contestant) {
       var data = { contestant: { eliminated: contestant.eliminated} }

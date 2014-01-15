@@ -48,9 +48,22 @@ angular.module('roses.controllers', []).
         return sorted
       }
     }
-  }]).
+  }])
+
+angular.module('rosesAdmin.controllers', []).
   controller('AdminCtrl', ['$scope', 'ContestantRepo', function($scope, ContestantRepo) {
     $scope.updateContestant = function(contestant) {
       ContestantRepo.save(contestant)
     }
+
+    $scope.showWeek = function(week) {
+      $scope.week = week
+      $scope.show = 'week'
+    }
+
+    $scope.showContestants = function() {
+      $scope.show = 'contestants'
+    }
+  }]).
+  controller('WeeklyResultsCtrl', ['$scope', function($scope) {
   }])

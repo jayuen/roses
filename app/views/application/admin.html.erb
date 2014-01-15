@@ -1,2 +1,32 @@
-<div ng-controller='AdminCtrl'>
+<% content_for :head do %>
+  <script>
+    var InitialData = {
+      contestants: <%= @contestants.to_json.html_safe %>
+    }
+  </script>
+<% end %>
+<div ng-app='rosesAdmin'>
+  <div ng-controller='AdminCtrl'>
+    <div class='index'>
+      <ul>
+        <li><a href='#' ng-click='showContestants()'>Contestants</a></li>
+        <li ng-repeat='week in weeks'>
+          <a href='#' ng-click='showWeek(week)'>{{week.name}}</a>
+        </li>
+      </ul>
+    </div>
+    <div class='content'>
+      <div ng-show="show == 'week'" ng-controller='WeeklyResultsCtrl'>
+        Results for: {{week.name}}
+        <table class='weekly-results'>
+          <tr>
+            <th>Order</th>
+            <th>Contestant</th>
+            <th>Rose</th>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
 </div>
+
