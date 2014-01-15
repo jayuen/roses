@@ -19,6 +19,7 @@
         <span>Will you accept this rose, <%= current_user.name %>?</span>
         <span class='link'> <%= link_to "Sign out", destroy_user_session_path, method: :delete %> </span>
         <span class='link'> <%= link_to("Admin", admin_path) if current_user.admin %> </span>
+        <span class='link'> <%= link_to("Picks", player_path(@player)) %> </span>
       </div>
     </header>
 
