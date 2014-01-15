@@ -49,6 +49,11 @@ header {
   padding: 10px;
 }
 
+header .link {
+  float:right;
+  padding-left:10px;
+}
+
 .rose {
   background-color: green;
 }
