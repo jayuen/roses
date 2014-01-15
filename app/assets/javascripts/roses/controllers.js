@@ -26,6 +26,14 @@ angular.module('roses.controllers', []).
       PicksRepo.save(pick)
     }
 
+    $scope.roseResult = function(week, pick) {
+      result = _.find(week.weekly_results, function(result) {
+        return result.contestant.id == pick.contestant.id
+      })
+
+      return result.rose
+    }
+
     $scope.picksForWeek = function(week) {
       if (week === undefined) {
         return []

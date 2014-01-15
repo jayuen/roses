@@ -39,6 +39,7 @@
             <td>{{pick.rose_order}}</td>
             <td><select ng-model="pick.contestant" ng-options="c.name for c in eligibleContestants" ng-change="updatePick(pick)"></select></td>
             <td ng-class="{'rose': pick.rose, 'no-rose': !pick.rose}"><input ng-model="pick.rose" type="checkbox" ng-change="updatePick(pick)" ></td>
+            <td>{{roseResult(week, pick)}}</td>
           </tr>
         </table>
       </div>
