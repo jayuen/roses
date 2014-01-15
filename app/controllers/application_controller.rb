@@ -21,5 +21,14 @@ class ApplicationController < ActionController::Base
 
   def admin
     @contestants = Contestant.where(season_id: @current_season.id)
+    @eligible_contestants = Contestant.eligible(@current_season.id)
+    weeks = Week.where(season_id: @current_season.id)
+    current_week = weeks.find {|w| @current_season.current_week_id == w.id}
+    if current_week.weekly_results.empty?
+      @eligible_contestants.each_with_index do |c, index|
+        WeeklyResult.create! week_id: current_week.id
+      end
+    end
+    @weeks = ActiveModel::ArraySerializer.new(weeks, each_serializer: WeeksSerializer)
   end
 end

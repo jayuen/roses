@@ -51,7 +51,9 @@ angular.module('roses.controllers', []).
   }])
 
 angular.module('rosesAdmin.controllers', []).
-  controller('AdminCtrl', ['$scope', 'ContestantRepo', function($scope, ContestantRepo) {
+  controller('AdminCtrl', ['$scope', 'ContestantsRepo', function($scope, ContestantRepo) {
+    $scope.weeks = InitialAdminData.weeks
+
     $scope.updateContestant = function(contestant) {
       ContestantRepo.save(contestant)
     }
@@ -68,5 +70,17 @@ angular.module('rosesAdmin.controllers', []).
   controller('ContestantsCtrl', ['$scope', function($scope) {
     $scope.contestants = InitialAdminData.contestants
   }]).
-  controller('WeeklyResultsCtrl', ['$scope', function($scope) {
+  controller('WeeklyResultsCtrl', ['$scope', 'WeeklyResultsRepo', function($scope, WeeklyResultRepo) {
+    $scope.eligibleContestants = InitialAdminData.eligibleContestants
+    $scope.weeklyResults = function(week) {
+      if (week === undefined) {
+        return []
+      } else {
+        return week.weekly_results
+      }
+    }
+
+    $scope.updateResult = function(result) {
+      WeeklyResultRepo.save(result)
+    }
   }])

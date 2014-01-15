@@ -29,12 +29,24 @@ services.factory('PlayersRepo', ['$http', function($http) {
 
 
 var adminServices = angular.module('rosesAdmin.services', [])
-adminServices.factory('ContestantRepo', ['$http', function($http) {
+adminServices.factory('ContestantsRepo', ['$http', function($http) {
   return {
     save: function(contestant) {
       var data = { contestant: { eliminated: contestant.eliminated} }
 
       return $http.put('/contestants/' + contestant.id, data).then(function(result) {
+        return result.data
+      })
+    }
+  }
+}])
+
+adminServices.factory('WeeklyResultsRepo', ['$http', function($http) {
+  return {
+    save: function(weeklyResult) {
+      var data = { weekly_result: { rose_order: weeklyResult.rose_order, contestant_id: weeklyResult.contestant.id, rose: weeklyResult.rose} }
+
+      return $http.put('/weekly_results/' + weeklyResult.id, data).then(function(result) {
         return result.data
       })
     }
