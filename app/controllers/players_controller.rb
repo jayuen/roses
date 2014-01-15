@@ -5,6 +5,7 @@ class PlayersController < ApplicationController
     season = Season.find(player.season_id)
 
     @weeks = Week.where(season_id: season.id)    
+    @weeks_json = ActiveModel::ArraySerializer.new(@weeks, each_serializer: WeeksSerializer).to_json
     @contestants = Contestant.where(season_id: season.id, eliminated: false)
 
     current_week_id = season.current_week_id

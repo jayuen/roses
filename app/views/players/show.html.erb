@@ -1,7 +1,7 @@
 <% content_for :head do %>
   <script>
     var InitialData = {
-      weeks: <%= @weeks.to_json.html_safe %>,
+      weeks: <%= @weeks_json.html_safe %>,
       contestants: <%= @contestants.to_json.html_safe %>,
       eligibleContestants: <%= @eligible_contestants.to_json.html_safe %>,
       player: <%= @player_json.html_safe %>

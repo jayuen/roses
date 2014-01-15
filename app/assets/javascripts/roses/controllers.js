@@ -76,6 +76,19 @@ angular.module('rosesAdmin.controllers', []).
       if (week === undefined) {
         return []
       } else {
+
+        function matchContestant(result, contestants){
+          return _.find(contestants, function(contestant) {
+            if (result.contestant) {
+              return result.contestant.id === contestant.id   
+            }
+          })
+        }
+
+        _.each(week.weekly_results, function(result) {
+          match = matchContestant(result, $scope.eligibleContestants)
+          result.contestant = match
+        })
         return week.weekly_results
       }
     }
