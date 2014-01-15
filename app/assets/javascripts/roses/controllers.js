@@ -30,8 +30,8 @@ angular.module('roses.controllers', []).
       if (week === undefined) {
         return []
       } else {
-        var filtered = _.filter($scope.player.picks, function(pick) { return pick.week_id == week.id})
-        var sorted = _.sortBy(filtered, function(pick) { return pick.rose_order })
+        var forWeek = _.filter($scope.player.picks, function(pick) { return pick.week_id == week.id})
+        var sorted = _.sortBy(forWeek, function(pick) { return pick.rose_order })
 
         function matchContestant(pick, contestants){
           return _.find(contestants, function(contestant) {
