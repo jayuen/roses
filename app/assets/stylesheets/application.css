@@ -11,6 +11,10 @@
  *= require_self
  *= require_tree .
  */
+body {
+  font-family:sans-serif;
+  color: #464247;
+}
 
 body, ul, li {
   margin: 0px;
@@ -60,5 +64,18 @@ header .link {
 
 .no-rose {
   background-color: red;
+}
+
+.weekly-picks, .weekly-scorecard {
+  float: left;
+}
+
+.header {
+  font-size: 40px;
+  font-weight: bold;
+}
+
+.weekly-scorecard {
+  margin-left: 30px;
 }
 
