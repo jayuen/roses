@@ -19,4 +19,8 @@ namespace :bootstrap do
     week = Week.create! season_id: season.id, name: args.name, season_id: season.id, locked: false
     season.update_attributes! current_week_id: week.id
   end
+
+  task :new_admin, [:email] => :environment do |t, args|
+    User.where(email: args.email).first.update_attributes! admin: true
+  end
 end
