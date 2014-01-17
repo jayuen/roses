@@ -66,7 +66,7 @@ header .link {
   background-color: red;
 }
 
-.weekly-picks, .weekly-scorecard {
+.weekly-picks, .weekly-scorecard, .weekly-results, .compute-scores {
   float: left;
 }
 
@@ -75,7 +75,11 @@ header .link {
   font-weight: bold;
 }
 
-.weekly-scorecard {
+.weekly-scorecard, .compute-scores {
   margin-left: 30px;
+}
+
+.compute-scores button {
+  font-size: 20px;
 }
 

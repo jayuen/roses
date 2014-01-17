@@ -31,20 +31,25 @@
         </table>
       </div>
       <div ng-show="show == 'week'" ng-controller='WeeklyResultsCtrl'>
-        <div class='header'>Results</div>
-        <div>{{week.name}}</div>
-        <table class='weekly-results'>
-          <tr>
-            <th>Order</th>
-            <th>Contestant</th>
-            <th>Rose</th>
-          </tr>
-          <tr ng-repeat="result in weeklyResults(week)">
-            <td><input type='hidden' ng-model="result.rose_order" value='$index+1'>{{$index+1}}</input></td>
-            <td><select ng-model="result.contestant" ng-options="c.name for c in eligibleContestants" ng-change="updateResult(result)"></select></td>
-            <td ng-class="{'rose': result.rose, 'no-rose': !result.rose}"><input ng-model="result.rose" type="checkbox" ng-change="updateResult(result)" ></td>
-          </tr>
-        </table>
+        <div class='weekly-results'>
+          <div class='header'>Results</div>
+          <div>{{week.name}}</div>
+          <table>
+            <tr>
+              <th>Order</th>
+              <th>Contestant</th>
+              <th>Rose</th>
+            </tr>
+            <tr ng-repeat="result in weeklyResults(week)">
+              <td><input type='hidden' ng-model="result.rose_order" value='$index+1'>{{$index+1}}</input></td>
+              <td><select ng-model="result.contestant" ng-options="c.name for c in eligibleContestants" ng-change="updateResult(result)"></select></td>
+              <td ng-class="{'rose': result.rose, 'no-rose': !result.rose}"><input ng-model="result.rose" type="checkbox" ng-change="updateResult(result)" ></td>
+            </tr>
+          </table>
+        </div>
+        <div class='compute-scores'>
+          <button ng-click="computeScores(week)">Compute Scores</button>
+        </div>
       </div>
     </div>
   </div>

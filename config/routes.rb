@@ -15,6 +15,9 @@ Roses::Application.routes.draw do
   end
 
   resources :weekly_results do
+    collection do
+      post :compute_scores
+    end
   end
 
   get 'admin' => 'application#admin'

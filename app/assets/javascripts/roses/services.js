@@ -49,6 +49,13 @@ adminServices.factory('WeeklyResultsRepo', ['$http', function($http) {
       return $http.put('/weekly_results/' + weeklyResult.id, data).then(function(result) {
         return result.data
       })
+    },
+
+    computeScores: function(week) {
+      var data = { week_id: week.id }
+      return $http.post('/weekly_results/compute_scores', data).then(function(result) {
+        return result.data
+      })
     }
   }
 }])

@@ -104,4 +104,8 @@ angular.module('rosesAdmin.controllers', []).
     $scope.updateResult = function(result) {
       WeeklyResultRepo.save(result)
     }
+
+    $scope.computeScores = function(weeklyResult) {
+      WeeklyResultRepo.computeScores(weeklyResult)
+    }
   }])

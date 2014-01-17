@@ -4,4 +4,9 @@ class WeeklyResultsController < ApplicationController
     WeeklyResult.find(params[:id]).update_attributes! weekly_result_params
     render json: {}
   end
+
+  def compute_scores
+    Scoring.compute(params.permit(:week_id)[:week_id])
+    render json: {}
+  end
 end
