@@ -13,8 +13,8 @@
     <div class='index'>
       <ul>
         <li><a href='#' ng-click='showWinnerPick()'>Winner pick</a></li>
-        <li ng-repeat='week in weeks'>
-          <a href='#' ng-click='showWeek(week)'>{{week.name}}</a>
+        <li ng-repeat='weeklyEntry in player.weekly_entries'>
+          <a href='#' ng-click='showWeeklyEntry(weeklyEntry)'>{{weeklyEntry.week.name}}</a>
         </li>
       </ul>
     </div>
@@ -27,21 +27,29 @@
       </div>
 
       <div ng-show="show == 'week'" ng-controller='WeekCtrl'>
-        Picks for: {{week.name}}
-        <table class='weekly-picks'>
-          <tr>
-            <th>Order</th>
-            <th>Contestant</th>
-            <th>Will get rose?</th>
-            <th>Actual rose result</th>
-          </tr>
-          <tr ng-repeat="pick in picksForWeek(week)">
-            <td>{{pick.rose_order}}</td>
-            <td><select ng-model="pick.contestant" ng-options="c.name for c in eligibleContestants" ng-change="updatePick(pick)"></select></td>
-            <td ng-class="{'rose': pick.rose, 'no-rose': !pick.rose}"><input ng-model="pick.rose" type="checkbox" ng-change="updatePick(pick)" ></td>
-            <td>{{roseResult(week, pick)}}</td>
-          </tr>
-        </table>
+        <div class='weekly-picks'>
+          <div class='header'>Picks</div>
+          <table>
+            <tr>
+              <th>Order</th>
+              <th>Contestant</th>
+              <th>Will get rose?</th>
+              <th>Actual rose result</th>
+            </tr>
+            <tr ng-repeat="pick in picksForWeek(weeklyEntry)">
+              <td>{{pick.rose_order}}</td>
+              <td><select ng-model="pick.contestant" ng-options="c.name for c in eligibleContestants" ng-change="updatePick(pick)"></select></td>
+              <td ng-class="{'rose': pick.rose, 'no-rose': !pick.rose}"><input ng-model="pick.rose" type="checkbox" ng-change="updatePick(pick)" ></td>
+              <td></td>
+            </tr>
+          </table>
+        </div>
+        <div class='weekly-scorecard'>
+          <div class='header'>Scoring</div>
+          <div>Correct picks: {{weeklyEntry.correct_picks}}</div>
+          <div>Final rose tiebreaker: {{weeklyEntry.final_rose_match}}</div>
+          <div>Standing: {{weeklyEntry.standing}}</div>
+        </div>
       </div>
     </div>
   </div>

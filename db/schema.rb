@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140115041856) do
+ActiveRecord::Schema.define(version: 20140117032732) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,11 +25,11 @@ ActiveRecord::Schema.define(version: 20140115041856) do
   create_table "picks", force: true do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "week_id"
     t.integer  "rose_order"
     t.integer  "contestant_id"
     t.boolean  "rose"
     t.integer  "player_id"
+    t.integer  "weekly_entry_id"
   end
 
   create_table "players", force: true do |t|
@@ -65,6 +65,12 @@ ActiveRecord::Schema.define(version: 20140115041856) do
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
+
+  create_table "weekly_entries", force: true do |t|
+    t.integer "week_id"
+    t.integer "player_id"
+    t.integer "correct_picks"
+  end
 
   create_table "weekly_results", force: true do |t|
     t.integer "week_id"

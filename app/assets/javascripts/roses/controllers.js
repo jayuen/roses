@@ -5,8 +5,8 @@ angular.module('roses.controllers', []).
     $scope.contestants = InitialData.contestants
     $scope.eligibleContestants = InitialData.eligibleContestants
 
-    $scope.showWeek = function(week) {
-      $scope.week = week
+    $scope.showWeeklyEntry = function(weeklyEntry) {
+      $scope.weeklyEntry = weeklyEntry
       $scope.show = 'week'
     }
 
@@ -34,12 +34,12 @@ angular.module('roses.controllers', []).
       return result.rose
     }
 
-    $scope.picksForWeek = function(week) {
-      if (week === undefined) {
+    $scope.picksForWeek = function(weeklyEntry) {
+      if (weeklyEntry === undefined) {
         return []
       } else {
-        var forWeek = _.filter($scope.player.picks, function(pick) { return pick.week_id == week.id})
-        var sorted = _.sortBy(forWeek, function(pick) { return pick.rose_order })
+        var picks = weeklyEntry.picks
+        var sorted = _.sortBy(picks, function(pick) { return pick.rose_order })
 
         function matchContestant(pick, contestants){
           return _.find(contestants, function(contestant) {

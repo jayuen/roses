@@ -7,14 +7,11 @@ class PlayersController < ApplicationController
     @weeks = Week.where(season_id: season.id)    
     @weeks_json = ActiveModel::ArraySerializer.new(@weeks, each_serializer: WeeksSerializer).to_json
     @contestants = Contestant.where(season_id: season.id, eliminated: false)
-
-    current_week_id = season.current_week_id
     @eligible_contestants = Contestant.eligible(season.id)
 
-    if player.picks.empty?
-      @eligible_contestants.each_with_index do |c, index|
-        player.picks.create! rose_order: index+1, player_id: player.id, week_id: current_week_id 
-      end
+    current_week_id = season.current_week_id
+    if player.weekly_entries.where(week_id: current_week_id).empty?
+      WeeklyEntryFactory.create_entry(player.id, current_week_id, @eligible_contestants)
     end
 
     @player_json = PlayersSerializer.new(player).to_json

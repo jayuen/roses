@@ -1,14 +1,15 @@
 class PlayersSerializer < ActiveModel::Serializer
   class PickSerializer < ActiveModel::Serializer
-    attributes :rose_order, :rose, :week_id, :contestant, :id#, :last_updated
+    attributes :rose_order, :rose, :contestant, :id, :weekly_entry_id
     has_one :contestant
-=begin
-    def last_updated
-      object.updated_at.strftime('%Y-%m-%d %I:%M %p')
-    end
-=end
+  end
+
+  class WeeklyEntrySerializer < ActiveModel::Serializer
+    attributes :player_id, :correct_picks
+    has_one :week
+    has_many :picks, serializer: PickSerializer
   end
 
   attributes :winner_id, :id
-  has_many :picks, serializer: PickSerializer
+  has_many :weekly_entries, serializer: WeeklyEntrySerializer
 end
