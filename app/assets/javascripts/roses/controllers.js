@@ -93,11 +93,14 @@ angular.module('rosesAdmin.controllers', []).
           })
         }
 
-        _.each(week.weekly_results, function(result) {
+        var results = week.weekly_results
+        var sorted = _.sortBy(results, function(result) { return result.rose_order })
+
+        _.each(sorted, function(result) {
           match = matchContestant(result, $scope.eligibleContestants)
           result.contestant = match
         })
-        return week.weekly_results
+        return sorted
       }
     }
 
