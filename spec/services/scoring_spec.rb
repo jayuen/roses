@@ -28,19 +28,20 @@ describe "Services::Scoring" do
   end
 
   describe "set_final_rose_distance" do
-    xit "computes the final rose distance" do
-      weekly_entry = week.weekly_entries.build  
+    it "computes the final rose distance" do
+      weekly_entry = WeeklyEntry.new
       weekly_entry.picks.build rose_order: 1, rose: true, contestant: sally
       weekly_entry.picks.build rose_order: 2, rose: true, contestant: molly
       weekly_entry.picks.build rose_order: 3, rose: true, contestant: kelly
 
-      week.weekly_results.build rose_order: 1, rose: true, contestant: kelly
-      week.weekly_results.build rose_order: 2, rose: true, contestant: sally
-      week.weekly_results.build rose_order: 3, rose: true, contestant: molly
+      results = []
+      results << WeeklyResult.new(rose_order: 1, rose: true, contestant: kelly)
+      results << WeeklyResult.new(rose_order: 2, rose: true, contestant: sally)
+      results << WeeklyResult.new(rose_order: 3, rose: true, contestant: molly)
 
-      Scoring.compute(week)
+      Scoring.set_final_rose_distance(weekly_entry, results)
 
-      weekly_entry.correct_picks.should == 0
+      weekly_entry.final_rose_distance.should == -2
     end
   end
 end
