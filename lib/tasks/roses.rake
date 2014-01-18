@@ -4,7 +4,7 @@ namespace :roses do
   desc "bootstrap season 18"
   task bootstrap_season_18: :environment do
     season = Season.create! name: 'Season 18', current: true
-    week = Week.create! season_id: season.id, name: '2014-01-06 - Week 1', season_id: season.id, locked: false
+    week = Week.create! season_id: season.id, name: '2014-01-06 (Week 1)', season_id: season.id, locked: false
     season.update_attributes! current_week_id: week.id
 
     ['Sharleen', 'Clare', 'Nikki', 'Renee', 'Andi', 'Alli', 'Chantel', 'Lauren S', 'Kelly', 
@@ -18,6 +18,9 @@ namespace :roses do
   desc "provision a new week"
   task :new_week, [:season_name, :name] => :environment do |t,args|
     season = Season.where(name: args.season_name).first
+    Week.where(season_id: season.id).each do |w|
+      w.update_attributes! locked: true
+    end
     week = Week.create! season_id: season.id, name: args.name, season_id: season.id, locked: false
     season.update_attributes! current_week_id: week.id
   end

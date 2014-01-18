@@ -37,12 +37,20 @@
               <th>Will get rose?</th>
               <th>Actual rose result</th>
             </tr>
-            <tr ng-repeat="pick in picksForWeek(weeklyEntry)">
-              <td>{{pick.rose_order}}</td>
-              <td><select ng-model="pick.contestant" ng-options="c.name for c in eligibleContestants" ng-change="updatePick(pick)"></select></td>
-              <td ng-class="{'rose': pick.rose, 'no-rose': !pick.rose}"><input ng-model="pick.rose" type="checkbox" ng-change="updatePick(pick)" ></td>
-              <td></td>
-            </tr>
+            <tbody ng-if="!weeklyEntry.week.locked">
+              <tr ng-repeat="pick in picksForWeek(weeklyEntry)">
+                <td>{{pick.rose_order}}</td>
+                <td><select ng-model="pick.contestant" ng-options="c.name for c in eligibleContestants" ng-change="updatePick(pick)"></select></td>
+                <td ng-class="{'rose': pick.rose, 'no-rose': !pick.rose}"><input ng-model="pick.rose" type="checkbox" ng-change="updatePick(pick)" ></td>
+              </tr>
+            </tbody>
+            <tbody ng-if="weeklyEntry.week.locked">
+              <tr ng-repeat="pick in picksForLockedWeek(weeklyEntry)">
+                <td>{{pick.rose_order}}</td>
+                <td>{{pick.contestant.name}}</td>
+                <td ng-class="{'rose': pick.rose, 'no-rose': !pick.rose}">{{pick.rose}}</td>
+              </tr>
+            </tbody>
           </table>
         </div>
         <div class='weekly-scorecard'>

@@ -34,6 +34,14 @@ angular.module('roses.controllers', []).
       return result.rose
     }
 
+    $scope.picksForLockedWeek = function(weeklyEntry) {
+      if (weeklyEntry == undefined) {
+        return []
+      } else {
+        return _.sortBy(weeklyEntry.picks, function(pick) { return pick.rose_order})
+      }
+    }
+
     $scope.picksForWeek = function(weeklyEntry) {
       if (weeklyEntry === undefined) {
         return []
