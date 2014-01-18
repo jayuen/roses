@@ -28,6 +28,7 @@ end
 
 group :development do
   gem 'rspec'
+  gem 'rspec-rails'
 end
 
 #gem 'jquery-rails'
