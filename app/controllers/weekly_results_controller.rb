@@ -6,7 +6,8 @@ class WeeklyResultsController < ApplicationController
   end
 
   def compute_scores
-    Scoring.compute(params.permit(:week_id)[:week_id])
+    week_id = params.permit(:week_id)[:week_id]
+    Scoring.compute(Week.where(id: week_id).first)
     render json: {}
   end
 end
