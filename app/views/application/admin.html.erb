@@ -41,7 +41,7 @@
               <th>Rose</th>
             </tr>
             <tr ng-repeat="result in weeklyResults(week)">
-              <td><input type='hidden' ng-model="result.rose_order" value='$index+1'>{{$index+1}}</input></td>
+              <td>{{result.rose_order}}</td>
               <td><select ng-model="result.contestant" ng-options="c.name for c in eligibleContestants" ng-change="updateResult(result)"></select></td>
               <td ng-class="{'rose': result.rose, 'no-rose': !result.rose}"><input ng-model="result.rose" type="checkbox" ng-change="updateResult(result)" ></td>
             </tr>

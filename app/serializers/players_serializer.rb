@@ -5,7 +5,7 @@ class PlayersSerializer < ActiveModel::Serializer
   end
 
   class WeeklyEntrySerializer < ActiveModel::Serializer
-    attributes :player_id, :correct_picks
+    attributes :player_id, :correct_picks, :final_rose_distance
     has_one :week
     has_many :picks, serializer: PickSerializer
   end
