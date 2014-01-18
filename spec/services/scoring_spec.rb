@@ -8,8 +8,8 @@ describe "Services::Scoring" do
   describe "set_correct_picks" do
     it "set the correct picks when all picks are right" do
       weekly_entry = WeeklyEntry.new
-      weekly_entry.picks.build rose_order: 1, rose: true, contestant: sally
-      weekly_result = WeeklyResult.new rose_order: 1, rose: true, contestant: sally
+      weekly_entry.picks.build rose: true, contestant: sally
+      weekly_result = WeeklyResult.new rose: true, contestant: sally
 
       Scoring.set_correct_picks(weekly_entry, [weekly_result])
 
@@ -18,8 +18,8 @@ describe "Services::Scoring" do
 
     it "sets the correct picks when all picks are wrong" do
       weekly_entry = WeeklyEntry.new
-      weekly_entry.picks.build rose_order: 1, rose: false, contestant: sally
-      weekly_result = WeeklyResult.new rose_order: 1, rose: true, contestant: sally
+      weekly_entry.picks.build rose: false, contestant: sally
+      weekly_result = WeeklyResult.new rose: true, contestant: sally
 
       Scoring.set_correct_picks(weekly_entry, [weekly_result])
 
