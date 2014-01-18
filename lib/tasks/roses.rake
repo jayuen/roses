@@ -1,7 +1,7 @@
 require 'rake'
 
-namespace :bootstrap do
-  task season_18_data: :environment do
+namespace :roses do
+  task bootstrap_season_18: :environment do
     season = Season.create! name: 'Season 18', current: true
     week = Week.create! season_id: season.id, name: '2014-01-06 - Week 1', season_id: season.id, locked: false
     season.update_attributes! current_week_id: week.id
@@ -23,4 +23,5 @@ namespace :bootstrap do
   task :new_admin, [:email] => :environment do |t, args|
     User.where(email: args.email).first.update_attributes! admin: true
   end
+
 end
