@@ -26,7 +26,7 @@ class ApplicationController < ActionController::Base
     current_week = weeks.find {|w| @current_season.current_week_id == w.id}
     if current_week.weekly_results.empty?
       @eligible_contestants.each_with_index do |c, index|
-        WeeklyResult.create! week_id: current_week.id
+        WeeklyResult.create! week_id: current_week.id, rose_order: index+1
       end
     end
     @weeks = ActiveModel::ArraySerializer.new(weeks, each_serializer: WeeksSerializer)
