@@ -1,5 +1,6 @@
 angular.module('roses.controllers').
   controller('IndexCtrl', function($scope) {
+    $scope.season = InitialData.season
     $scope.weeks = InitialData.weeks
     $scope.player = InitialData.player
     $scope.contestants = InitialData.contestants

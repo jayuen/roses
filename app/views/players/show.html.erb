@@ -1,6 +1,7 @@
 <% content_for :head do %>
   <script>
     var InitialData = {
+      season: <%= @season.to_json.html_safe %>,
       weeks: <%= @weeks_json.html_safe %>,
       contestants: <%= @contestants.to_json.html_safe %>,
       eligibleContestants: <%= @eligible_contestants.to_json.html_safe %>,
@@ -25,15 +26,23 @@
       </div>
 
       <div class='pick-winner' ng-show="show == 'winner'" ng-controller="PickWinnerCtrl">
+        <div class='header'>Winning pick <span ng-if="season.lockdown_winner">(locked)</span></div>
+        <br/>
         <form ng-controller='PickWinnerCtrl'>
-          <label for='select-winner'>Who do you think will win?</label> 
-          <select id='select-winner' ng-model="player.winner" ng-options="c.name for c in contestants" ng-change="updateWinnerPick()"></select>
+          <div ng-if="!season.lockdown_winner" >
+            <label for='select-winner'>Who do you think will win?</label> 
+            <select id='select-winner' ng-model="player.winner" ng-options="c.name for c in contestants" ng-change="updateWinnerPick()"></select>
+          </div>
+          <div ng-if="season.lockdown_winner">
+            <span>You picked: {{player.winner.name}}</span>
+          </div>
         </form>
       </div>
 
       <div ng-show="show == 'week'" ng-controller='WeekCtrl'>
         <div class='weekly-picks'>
-          <div class='header'>Picks</div>
+          <div class='header'>Picks <span ng-if="weeklyEntry.week.locked">(locked)</span></div>
+          <br/>
           <div>{{weeklyEntry.week.name}}</div>
           <table>
             <tr>
@@ -60,6 +69,7 @@
         </div>
         <div class='weekly-scorecard'>
           <div class='header'>Scoring</div>
+          <br/>
           <div>Correct picks: {{weeklyEntry.correct_picks}}</div>
           <div>Final rose tiebreaker: {{weeklyEntry.final_rose_distance}}</div>
           <div>Standing: {{weeklyEntry.standing}}</div>
