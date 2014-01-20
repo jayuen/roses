@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140118163927) do
+ActiveRecord::Schema.define(version: 20140120021217) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -42,6 +42,7 @@ ActiveRecord::Schema.define(version: 20140118163927) do
     t.text    "name"
     t.boolean "current"
     t.integer "current_week_id"
+    t.boolean "lockdown_winner", default: false
   end
 
   create_table "users", force: true do |t|
