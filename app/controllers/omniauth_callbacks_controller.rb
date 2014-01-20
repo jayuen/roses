@@ -19,6 +19,6 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
       player = Player.create! season_id: season.id, user_id: resource.id
     end
 
-    player_path(player)
+    instructions_path
   end
 end

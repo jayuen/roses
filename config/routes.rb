@@ -21,6 +21,7 @@ Roses::Application.routes.draw do
   end
 
   get 'admin' => 'application#admin'
+  get 'instructions' => 'application#instructions'
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

@@ -31,4 +31,7 @@ class ApplicationController < ActionController::Base
     end
     @weeks = ActiveModel::ArraySerializer.new(weeks, each_serializer: WeeksSerializer)
   end
+
+  def instructions
+  end
 end
