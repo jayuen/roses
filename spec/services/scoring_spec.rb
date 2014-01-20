@@ -60,4 +60,40 @@ describe "Services::Scoring" do
       weekly_entry.final_rose_distance.should == 0
     end
   end
+
+  describe "compute standings" do
+    example do
+      first = WeeklyEntry.new(correct_picks: 3) 
+      second = WeeklyEntry.new(correct_picks: 2) 
+
+      Scoring.compute_standings([first, second])
+
+      first.standing.should == 1
+      second.standing.should == 2
+    end
+
+    it "uses the final rose distance to break ties" do
+      third = WeeklyEntry.new(correct_picks: 3, final_rose_distance: -3) 
+      first = WeeklyEntry.new(correct_picks: 3, final_rose_distance: -1) 
+      second = WeeklyEntry.new(correct_picks: 3, final_rose_distance: -2) 
+
+      Scoring.compute_standings([third, second, first])
+
+      first.standing.should == 1
+      second.standing.should == 2
+      third.standing.should == 3
+    end
+
+    xit "results in a tie when the final rose distance is the same" do
+      third = WeeklyEntry.new(correct_picks: 3, final_rose_distance: -3) 
+      first = WeeklyEntry.new(correct_picks: 3, final_rose_distance: -1) 
+      first_tie = WeeklyEntry.new(correct_picks: 3, final_rose_distance: -1) 
+
+      Scoring.compute_standings([third, first_tie, first])
+
+      first.standing.should == 1
+      first_tie.standing.should == 1
+      third.standing.should == 3
+    end
+  end
 end
