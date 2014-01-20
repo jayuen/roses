@@ -13,4 +13,8 @@ angular.module('roses.controllers').
     $scope.showWinnerPick = function() {
       $scope.show = 'winner'
     }
+
+    $scope.showStandings = function() {
+      $scope.show = 'standings'
+    }
   })  

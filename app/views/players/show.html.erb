@@ -12,13 +12,18 @@
   <div ng-controller='IndexCtrl'>
     <div class='index'>
       <ul>
+        <li><a href='#' ng-click='showStandings()'>Standings</a></li>
         <li><a href='#' ng-click='showWinnerPick()'>Winner pick</a></li>
         <li ng-repeat='weeklyEntry in player.weekly_entries'>
-          <a href='#' ng-click='showWeeklyEntry(weeklyEntry)'>{{weeklyEntry.week.name}}</a>
+        <a href='#' ng-click='showWeeklyEntry(weeklyEntry)'>{{weeklyEntry.week.name}}</a>
         </li>
       </ul>
     </div>
     <div class='content'>
+      <div class='standings' ng-show="show == 'standings'" ng-controller="StandingsCtrl">
+        Coming soon!
+      </div>
+
       <div class='pick-winner' ng-show="show == 'winner'" ng-controller="PickWinnerCtrl">
         <form ng-controller='PickWinnerCtrl'>
           <label for='select-winner'>Who do you think will win?</label> 
