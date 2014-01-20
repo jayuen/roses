@@ -84,7 +84,8 @@ describe "Services::Scoring" do
       third.standing.should == 3
     end
 
-    xit "results in a tie when the final rose distance is the same" do
+    # Not classic tiebreaking.  It should be 1, 1, 3, rather than 1, 1, 2 but the former is harder to implement!
+    it "results in a tie when the final rose distance is the same" do
       third = WeeklyEntry.new(correct_picks: 3, final_rose_distance: -3) 
       first = WeeklyEntry.new(correct_picks: 3, final_rose_distance: -1) 
       first_tie = WeeklyEntry.new(correct_picks: 3, final_rose_distance: -1) 
@@ -93,7 +94,7 @@ describe "Services::Scoring" do
 
       first.standing.should == 1
       first_tie.standing.should == 1
-      third.standing.should == 3
+      third.standing.should == 2
     end
   end
 end

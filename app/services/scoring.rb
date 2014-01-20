@@ -13,21 +13,22 @@ module Scoring
     end
   end
 
-  Score = Struct.new(:entry, :correct_picks, :tiebreaker)
+  Score = Struct.new(:correct_picks, :tiebreaker)
 
-  def compute_standings(weekly_entries)
-    sorted = weekly_entries.
-      map {|entry| Score.new(entry, entry.correct_picks, entry.correct_picks + entry.final_rose_distance)}.
-      sort do |score1, score2|
-        if score1.correct_picks != score2.correct_picks
-          score2.correct_picks <=> score1.correct_picks
+  def compute_standings(entries)
+    ranked_correct_picks = entries.map {|_| Score.new(_.correct_picks, _.tiebreaker)}.uniq.sort {|x,y| [y.correct_picks, y.tiebreaker] <=> [x.correct_picks, x.tiebreaker]}
+
+    ranked_entries = entries.
+      sort do |entry1, entry2|
+        if entry1.correct_picks != entry2.correct_picks
+          entry2.correct_picks <=> entry1.correct_picks
         else
-          score2.tiebreaker <=> score1.tiebreaker
+          entry2.tiebreaker <=> entry1.tiebreaker
         end
       end
 
-    sorted.each_with_index do |score, index|
-      score.entry.standing = index+1
+    ranked_entries.each_with_index do |entry, index|
+      entry.standing = ranked_correct_picks.index(Score.new(entry.correct_picks, entry.tiebreaker))+1
     end
   end
 
