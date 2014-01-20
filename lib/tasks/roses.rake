@@ -30,4 +30,9 @@ namespace :roses do
     User.where(email: args.email).first.update_attributes! admin: true
   end
 
+  desc "lockdown winner"
+  task :lockdown_winner, [:season_name, :lockdown] => :environment do |t,args|
+    season = Season.where(name: args.season_name).first
+    season.update_attributes! lockdown_winner: args.lockdown
+  end
 end
