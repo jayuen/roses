@@ -35,4 +35,11 @@ namespace :roses do
     season = Season.where(name: args.season_name).first
     season.update_attributes! lockdown_winner: args.lockdown
   end
+
+  desc "lockdown week"
+  task :lockdown_week, [:season_name, :week_name, :locked] => :environment do |t,args|
+    season = Season.where(name: args.season_name).first
+    week = Week.where(season_id: season.id, name: args.week_name).first
+    week.update_attributes! locked: args.locked
+  end
 end
