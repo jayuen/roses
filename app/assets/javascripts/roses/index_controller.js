@@ -11,6 +11,12 @@ angular.module('roses.controllers').
       $scope.show = 'week'
     }
 
+    $scope.sortedWeeks = function(weeklyEntries) {
+      return _.sortBy(weeklyEntries, function(weeklyEntry) {
+        return weeklyEntry.week.name 
+      })
+    }
+
     $scope.showWinnerPick = function() {
       $scope.show = 'winner'
     }

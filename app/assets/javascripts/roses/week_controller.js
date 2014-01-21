@@ -5,11 +5,18 @@ angular.module('roses.controllers').
     }
 
     $scope.roseResult = function(week, pick) {
-      result = _.find(week.weekly_results, function(result) {
-        return result.contestant.id == pick.contestant.id
+      var results = _.find($scope.weeks, function(w) {
+        return w.id == week.id
+      }).weekly_results
+
+      var result = _.find(results, function(result) {
+        if (result.contestant) return result.contestant.id == pick.contestant.id
       })
 
+    if (result) 
       return result.rose
+    else
+      return false
     }
 
     $scope.picksForLockedWeek = function(weeklyEntry) {

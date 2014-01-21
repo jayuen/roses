@@ -15,7 +15,7 @@
       <ul>
         <li><a href='#' ng-click='showStandings()'>Standings</a></li>
         <li><a href='#' ng-click='showWinnerPick()'>Winner pick</a></li>
-        <li ng-repeat='weeklyEntry in player.weekly_entries'>
+        <li ng-repeat='weeklyEntry in sortedWeeks(player.weekly_entries)'>
         <a href='#' ng-click='showWeeklyEntry(weeklyEntry)'>{{weeklyEntry.week.name}}</a>
         </li>
       </ul>
@@ -49,12 +49,14 @@
               <th>Order</th>
               <th>Contestant</th>
               <th>Will get rose?</th>
+              <th>Rose?</th>
             </tr>
             <tbody ng-if="!weeklyEntry.week.locked">
               <tr ng-repeat="pick in picksForWeek(weeklyEntry)">
                 <td>{{pick.rose_order}}</td>
                 <td><select ng-model="pick.contestant" ng-options="c.name for c in eligibleContestants" ng-change="updatePick(pick)"></select></td>
                 <td ng-class="{'rose': pick.rose, 'no-rose': !pick.rose}"><input ng-model="pick.rose" type="checkbox" ng-change="updatePick(pick)" ></td>
+                <td>{{roseResult(weeklyEntry.week, pick)}}</td>
               </tr>
             </tbody>
             <tbody ng-if="weeklyEntry.week.locked">
@@ -62,6 +64,7 @@
                 <td>{{pick.rose_order}}</td>
                 <td>{{pick.contestant.name}}</td>
                 <td ng-class="{'rose': pick.rose, 'no-rose': !pick.rose}">{{pick.rose}}</td>
+                <td>{{roseResult(weeklyEntry.week, pick)}}</td>
               </tr>
             </tbody>
           </table>
