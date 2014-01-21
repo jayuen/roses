@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140120043326) do
+ActiveRecord::Schema.define(version: 20140121024910) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -79,7 +79,7 @@ ActiveRecord::Schema.define(version: 20140120043326) do
     t.integer "week_id"
     t.integer "rose_order"
     t.integer "contestant_id"
-    t.boolean "rose"
+    t.boolean "rose",          default: false
   end
 
   create_table "weeks", force: true do |t|
