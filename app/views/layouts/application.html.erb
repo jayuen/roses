@@ -20,6 +20,7 @@
         <span class='link'> <%= link_to "Sign out", destroy_user_session_path, method: :delete %> </span>
         <span class='link'> <%= link_to("Admin", admin_path) if current_user.admin %> </span>
         <span class='link'> <%= link_to("Picks", player_path(@player)) %> </span>
+        <span class='link'> <%= link_to("Standings", standings_path) %> </span>
         <span class='link'> <%= link_to("Instructions", instructions_path) %> </span>
       </div>
     </header>

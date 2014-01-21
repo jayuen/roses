@@ -13,7 +13,6 @@
   <div ng-controller='IndexCtrl'>
     <div class='index'>
       <ul>
-        <li><a href='#' ng-click='showStandings()'>Standings</a></li>
         <li><a href='#' ng-click='showWinnerPick()'>Winner pick</a></li>
         <li ng-repeat='weeklyEntry in sortedWeeks(player.weekly_entries)'>
         <a href='#' ng-click='showWeeklyEntry(weeklyEntry)'>{{weeklyEntry.week.name}}</a>
@@ -21,12 +20,8 @@
       </ul>
     </div>
     <div class='content'>
-      <div class='standings' ng-show="show == 'standings'" ng-controller="StandingsCtrl">
-        Coming soon!
-      </div>
-
       <div class='pick-winner' ng-show="show == 'winner'" ng-controller="PickWinnerCtrl">
-        <div class='header'>Winning pick <span ng-if="season.lockdown_winner">(locked)</span></div>
+        <div class='header inner'>Winning pick <span ng-if="season.lockdown_winner">(locked)</span></div>
         <br/>
         <form ng-controller='PickWinnerCtrl'>
           <div ng-if="!season.lockdown_winner" >
@@ -41,7 +36,7 @@
 
       <div ng-show="show == 'week'" ng-controller='WeekCtrl'>
         <div class='weekly-picks'>
-          <div class='header'>Picks <span ng-if="weeklyEntry.week.locked">(locked)</span></div>
+          <div class='header inner'>Picks <span ng-if="weeklyEntry.week.locked">(locked)</span></div>
           <br/>
           <div>{{weeklyEntry.week.name}}</div>
           <table>
@@ -70,7 +65,7 @@
           </table>
         </div>
         <div class='weekly-scorecard'>
-          <div class='header'>Scoring</div>
+          <div class='header inner'>Scoring</div>
           <br/>
           <div>Correct picks: {{weeklyEntry.correct_picks}}</div>
           <div>Final rose distance: {{weeklyEntry.final_rose_distance}}</div>

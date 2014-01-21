@@ -73,6 +73,11 @@ header .link {
 .header {
   font-size: 40px;
   font-weight: bold;
+  padding-left: 10px;
+}
+
+.header.inner {
+  padding-left: 0px;
 }
 
 .weekly-scorecard, .compute-scores {

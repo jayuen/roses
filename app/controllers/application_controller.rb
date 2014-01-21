@@ -34,4 +34,7 @@ class ApplicationController < ActionController::Base
 
   def instructions
   end
+
+  def standings
+  end
 end
