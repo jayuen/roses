@@ -35,6 +35,30 @@ class ApplicationController < ActionController::Base
   def instructions
   end
 
+  class PlayerSerializer < ActiveModel::Serializer
+    attributes :name
+  end
+
   def standings
+    @weeks = @current_season.weeks.sort {|x,y| x.name <=> y.name }
+    @players_json = ActiveModel::ArraySerializer.new(@current_season.players, each_serializer: PlayerSerializer).to_json
+    @standings = generate_standings(@weeks, @current_season.players)
+  end
+
+  Standing = Struct.new(:week_name, :player_name, :standing, :points)
+
+  def generate_standings weeks, players
+    standings = []
+    weeks.each do |week|
+      players.each do |player|
+        entry = WeeklyEntry.where(week_id: week.id, player_id: player.id).first
+        if entry
+          standings << Standing.new(week.name, player.name, entry.standing, Scoring::POINTS.fetch(entry.standing, 0))
+        else
+          standings << Standing.new(week.name, player.name, nil, 0)
+        end
+      end
+    end
+    standings
   end
 end

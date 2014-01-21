@@ -1,4 +1,5 @@
 var services = angular.module('roses.services', [])
+var adminServices = angular.module('rosesAdmin.services', [])
 
 services.factory('PicksRepo', ['$http', function($http) {
   return {
@@ -27,8 +28,6 @@ services.factory('PlayersRepo', ['$http', function($http) {
   }
 }])
 
-
-var adminServices = angular.module('rosesAdmin.services', [])
 adminServices.factory('ContestantsRepo', ['$http', function($http) {
   return {
     save: function(contestant) {

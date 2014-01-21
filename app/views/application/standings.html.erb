@@ -1,1 +1,26 @@
-<div class='header'>Standings</div>
+<% content_for :head do %>
+  <script>
+    var InitialStandingsData = {
+      weeks: <%= @weeks.to_json.html_safe %>,
+      players: <%= @players_json.html_safe %>,
+      standings: <%= @standings.to_json.html_safe %>
+    }
+  </script>
+<% end %>
+<div ng-app='rosesStandings'>
+  <div ng-controller='StandingsCtrl'>
+    <div class='header'>Standings</div>
+    <br/>
+    <table style="margin-left:10px">
+      <tr>
+        <th/>
+        <th ng-repeat="week in weeks">{{week.name}}</th>
+      </tr>
+      <tr ng-repeat="player in players">
+        <td>{{player.name}}</td>
+        <td ng-repeat="standing in playerStandings(player, standings)">{{standing.standing}} ({{standing.points}} pts)</td>
+      </tr>
+    </table>
+  </div>
+</div>
+

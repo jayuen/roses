@@ -19,6 +19,8 @@
     </div>
     <div class='content'>
       <div ng-show="show == 'contestants'" ng-controller='ContestantsCtrl'>
+        <div class='header inner'>Contestants</div>
+        <br/>
         <table class='contestants'>
           <tr>
             <th>Contestant</th>
@@ -32,7 +34,8 @@
       </div>
       <div ng-show="show == 'week'" ng-controller='WeeklyResultsCtrl'>
         <div class='weekly-results'>
-          <div class='header'>Results</div>
+          <div class='header inner'>Results</div>
+          <br/>
           <div>{{week.name}}</div>
           <table>
             <tr>

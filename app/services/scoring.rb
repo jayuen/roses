@@ -1,6 +1,8 @@
 module Scoring
   extend self
 
+  POINTS = {1 => 3, 2 => 2, 3 => 1}
+
   def compute(week)
     week.weekly_entries.each do |weekly_entry|
       compute_score_for(weekly_entry, week.weekly_results)

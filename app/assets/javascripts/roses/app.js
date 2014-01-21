@@ -8,7 +8,10 @@ angular.module('rosesAdmin', [
   'rosesAdmin.services'
 ])
 
+angular.module('rosesStandings', [
+  'rosesStandings.controllers'
+])
+
 angular.module('roses.controllers', [])
 angular.module('rosesAdmin.controllers', [])
-
-
+angular.module('rosesStandings.controllers', [])
