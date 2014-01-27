@@ -45,7 +45,7 @@ class ApplicationController < ActionController::Base
     @standings = generate_standings(@weeks, @current_season.players)
   end
 
-  Standing = Struct.new(:week_name, :player_name, :standing, :points)
+  Standing = Struct.new(:week_name, :player_name, :standing, :points, :correct_picks)
 
   def generate_standings weeks, players
     standings = []
@@ -53,9 +53,9 @@ class ApplicationController < ActionController::Base
       players.each do |player|
         entry = WeeklyEntry.where(week_id: week.id, player_id: player.id).first
         if entry
-          standings << Standing.new(week.name, player.name, entry.standing, Scoring::POINTS.fetch(entry.standing, 0))
+          standings << Standing.new(week.name, player.name, entry.standing, Scoring::POINTS.fetch(entry.standing, 0), entry.correct_picks)
         else
-          standings << Standing.new(week.name, player.name, nil, 0)
+          standings << Standing.new(week.name, player.name, nil, 0, 0)
         end
       end
     end

@@ -18,7 +18,7 @@
       </tr>
       <tr ng-repeat="player in players">
         <td>{{player.name}}</td>
-        <td ng-repeat="standing in playerStandings(player, standings)">{{standing.standing}} ({{standing.points}} pts)</td>
+        <td ng-repeat="standing in playerStandings(player, standings)">{{standing.points}} pts (Rank: {{standing.standing}}, Correct: {{standing.correct_picks}})</td>
       </tr>
     </table>
   </div>

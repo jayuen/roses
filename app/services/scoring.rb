@@ -2,6 +2,7 @@ module Scoring
   extend self
 
   POINTS = {1 => 3, 2 => 2, 3 => 1}
+  NO_FINAL_ROSE = -100
 
   def compute(week)
     week.weekly_entries.each do |weekly_entry|
@@ -61,9 +62,13 @@ module Scoring
     reverse_rose_order = reverse_rose_order(weekly_results)
 
     final_rose_distance = 0
-    reverse_rose_order.each do |result|
-      final_rose_match = result.contestant == final_rose_pick.contestant
-      final_rose_match ? break : final_rose_distance -= 1
+    if final_rose_pick
+      reverse_rose_order.each do |result|
+        final_rose_match = result.contestant == final_rose_pick.contestant
+        final_rose_match ? break : final_rose_distance -= 1
+      end
+    else
+      final_rose_distance = NO_FINAL_ROSE
     end
 
     weekly_entry.final_rose_distance = final_rose_distance

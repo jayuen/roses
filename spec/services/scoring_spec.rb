@@ -52,12 +52,13 @@ describe "Services::Scoring" do
       weekly_entry.final_rose_distance.should == -2
     end
 
-    it "resets the final rose distance" do
-      weekly_entry.final_rose_distance = 100
+    it "returns a large distance when no roses are given" do
+      weekly_entry.picks.build rose_order: 1, rose: false, contestant: sally
+      results  = [WeeklyResult.new(rose_order: 1, rose: true, contestant: sally)]
 
-      Scoring.set_final_rose_distance(weekly_entry, [])
+      Scoring.set_final_rose_distance(weekly_entry, results)
 
-      weekly_entry.final_rose_distance.should == 0
+      weekly_entry.final_rose_distance.should == Scoring::NO_FINAL_ROSE
     end
   end
 
