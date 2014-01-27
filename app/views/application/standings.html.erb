@@ -14,10 +14,12 @@
     <table style="margin-left:10px;font-size:0.8em">
       <tr>
         <th/>
+        <th>Winner pick</th>
         <th ng-repeat="week in weeks">{{week.name}}</th>
       </tr>
       <tr ng-repeat="player in players">
         <td>{{player.name}}</td>
+        <td>{{player.winner_name}}</td>
         <td ng-repeat="standing in playerStandings(player, standings)">{{standing.points}} pts (Rank: {{standing.standing}}, Correct: {{standing.correct_picks}})</td>
       </tr>
     </table>
