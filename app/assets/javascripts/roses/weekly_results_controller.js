@@ -19,7 +19,7 @@ angular.module('rosesAdmin.controllers').
         var sorted = _.sortBy(results, function(result) { return result.rose_order })
 
         _.each(sorted, function(result) {
-          match = matchContestant(result, $scope.eligibleContestants)
+          match = matchContestant(result, $scope.contestants)
           result.contestant = match
         })
         return sorted
