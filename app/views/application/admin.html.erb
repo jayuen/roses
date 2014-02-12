@@ -45,7 +45,7 @@
             </tr>
             <tr ng-repeat="result in weeklyResults(week)">
               <td>{{result.rose_order}}</td>
-              <td><select ng-model="result.contestant" ng-options="c.name for c in eligibleContestants" ng-change="updateResult(result)"></select></td>
+              <td><select ng-model="result.contestant" ng-options="c.name group by c.eliminated for c in contestants" ng-change="updateResult(result)"></select></td>
               <td ng-class="{'rose': result.rose, 'no-rose': !result.rose}"><input ng-model="result.rose" type="checkbox" ng-change="updateResult(result)" ></td>
             </tr>
           </table>

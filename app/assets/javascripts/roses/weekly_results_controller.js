@@ -1,6 +1,7 @@
 angular.module('rosesAdmin.controllers').
   controller('WeeklyResultsCtrl', ['$scope', 'WeeklyResultsRepo', function($scope, WeeklyResultRepo) {
     $scope.eligibleContestants = InitialAdminData.eligibleContestants
+    $scope.contestants = InitialAdminData.contestants
     $scope.weeklyResults = function(week) {
       if (week === undefined) {
         return []
