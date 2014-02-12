@@ -99,3 +99,15 @@ td, th {
   vertical-align:top;
   padding: 0px 10px 5px;
 }
+
+td.gold {
+  background-color: gold
+}
+
+td.silver {
+  background-color: silver
+}
+
+td.bronze {
+  background-color: #E47833
+}
