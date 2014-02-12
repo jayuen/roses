@@ -45,7 +45,9 @@ module Scoring
     picks = weekly_entry.picks
     picks.each do |pick|
       weekly_result = weekly_results.find{|result| result.contestant == pick.contestant}
-      if pick.rose? and weekly_result.rose?
+      if pick.rose? && weekly_result.rose?
+        weekly_entry.correct_picks += 1
+      elsif !pick.rose? && !weekly_result.rose?
         weekly_entry.correct_picks += 1
       end
     end

@@ -7,9 +7,18 @@ describe "Services::Scoring" do
   let(:weekly_entry) { WeeklyEntry.new }
 
   describe "set_correct_picks" do
-    it "set the correct picks when all picks are right" do
+    it "set the correct picks when all rose picks are right" do
       weekly_entry.picks.build rose: true, contestant: sally
       weekly_result = WeeklyResult.new rose: true, contestant: sally
+
+      Scoring.set_correct_picks(weekly_entry, [weekly_result])
+
+      weekly_entry.correct_picks.should == 1
+    end
+
+    it "set the correct picks when all no rose picks are right" do
+      weekly_entry.picks.build rose: false, contestant: sally
+      weekly_result = WeeklyResult.new rose: false, contestant: sally
 
       Scoring.set_correct_picks(weekly_entry, [weekly_result])
 
