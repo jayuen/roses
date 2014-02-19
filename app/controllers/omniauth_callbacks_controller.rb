@@ -1,7 +1,13 @@
 class OmniauthCallbacksController < Devise::OmniauthCallbacksController
   def google_oauth2
     user = User.from_omniauth(request.env["omniauth.auth"])
-    if user.persisted?
+
+    season = Season.where(current: true).first
+    player = season.players.where(user_id: user.id).first
+    if season.lockdown_winner and player.nil?
+      flash[:error] = "Sorry no new registrations are allowed. Try logging in with another Google account"
+      redirect_to root_path
+    elsif user.persisted?
       flash.notice = "Signed in Through Google!"
       sign_in_and_redirect user
     else
