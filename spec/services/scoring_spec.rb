@@ -4,7 +4,8 @@ describe "Services::Scoring" do
   let(:kelly) { Contestant.new }
   let(:sally) { Contestant.new }
   let(:molly) { Contestant.new }
-  let(:weekly_entry) { WeeklyEntry.new }
+  let(:week)  { Week.new}
+  let(:weekly_entry) { WeeklyEntry.new(week: week) }
 
   describe "set_correct_picks" do
     it "set the correct picks when all rose picks are right" do
@@ -73,8 +74,8 @@ describe "Services::Scoring" do
 
   describe "compute standings" do
     example do
-      first = WeeklyEntry.new(correct_picks: 3) 
-      second = WeeklyEntry.new(correct_picks: 2) 
+      first = WeeklyEntry.new(correct_picks: 3, week: week) 
+      second = WeeklyEntry.new(correct_picks: 2, week: week) 
 
       Scoring.compute_standings([first, second])
 
@@ -83,9 +84,9 @@ describe "Services::Scoring" do
     end
 
     it "uses the final rose distance to break ties" do
-      third = WeeklyEntry.new(correct_picks: 3, final_rose_distance: -3) 
-      first = WeeklyEntry.new(correct_picks: 3, final_rose_distance: -1) 
-      second = WeeklyEntry.new(correct_picks: 3, final_rose_distance: -2) 
+      third = WeeklyEntry.new(correct_picks: 3, final_rose_distance: -3, week: week) 
+      first = WeeklyEntry.new(correct_picks: 3, final_rose_distance: -1, week: week) 
+      second = WeeklyEntry.new(correct_picks: 3, final_rose_distance: -2, week: week) 
 
       Scoring.compute_standings([third, second, first])
 
@@ -96,9 +97,9 @@ describe "Services::Scoring" do
 
     # Not classic tiebreaking.  It should be 1, 1, 3, rather than 1, 1, 2 but the former is harder to implement!
     it "results in a tie when the final rose distance is the same" do
-      third = WeeklyEntry.new(correct_picks: 3, final_rose_distance: -3) 
-      first = WeeklyEntry.new(correct_picks: 3, final_rose_distance: -1) 
-      first_tie = WeeklyEntry.new(correct_picks: 3, final_rose_distance: -1) 
+      third = WeeklyEntry.new(correct_picks: 3, final_rose_distance: -3, week: week) 
+      first = WeeklyEntry.new(correct_picks: 3, final_rose_distance: -1, week: week) 
+      first_tie = WeeklyEntry.new(correct_picks: 3, final_rose_distance: -1, week: week) 
 
       Scoring.compute_standings([third, first_tie, first])
 
@@ -108,9 +109,9 @@ describe "Services::Scoring" do
     end
 
     it "gives three points to first, two points to second, one point to third" do
-      first = WeeklyEntry.new(correct_picks: 3) 
-      second = WeeklyEntry.new(correct_picks: 2) 
-      third = WeeklyEntry.new(correct_picks: 1) 
+      first = WeeklyEntry.new(correct_picks: 3, week: week) 
+      second = WeeklyEntry.new(correct_picks: 2, week: week) 
+      third = WeeklyEntry.new(correct_picks: 1, week: week) 
 
       Scoring.compute_standings([first, third, second])
 
@@ -121,7 +122,13 @@ describe "Services::Scoring" do
   end
 
   describe "scoring for final week" do
-    it "" do
+    it "sets the score to the number of correct picks" do
+      week = Week.new episode_type: Week::FINAL_FOUR
+      entry = WeeklyEntry.new(correct_picks: 5, week: week) 
+
+      Scoring.compute_standings([entry])
+
+      entry.score.should == 5
     end
   end
 end

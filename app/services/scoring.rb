@@ -34,7 +34,11 @@ module Scoring
 
     ranked_entries.each_with_index do |entry, index|
       entry.standing = ranked_correct_picks.index(Score.new(entry.correct_picks, entry.tiebreaker))+1
-      entry.score = Scoring::POINTS.fetch(entry.standing, 0) 
+      if entry.week.regular?
+        entry.score = Scoring::POINTS.fetch(entry.standing, 0) 
+      else
+        entry.score = entry.correct_picks
+      end
     end
   end
 
