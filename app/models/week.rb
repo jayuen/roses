@@ -24,4 +24,8 @@ class Week < ActiveRecord::Base
   def final_six?
     self.episode_type == FINAL_SIX
   end
+
+  def regular?
+    self.episode_type == REGULAR
+  end
 end
