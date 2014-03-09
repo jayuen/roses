@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140309181940) do
+ActiveRecord::Schema.define(version: 20140309220921) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -73,6 +73,7 @@ ActiveRecord::Schema.define(version: 20140309181940) do
     t.integer "correct_picks",       default: 0
     t.integer "final_rose_distance", default: 0
     t.integer "standing"
+    t.integer "score",               default: 0
   end
 
   create_table "weekly_results", force: true do |t|

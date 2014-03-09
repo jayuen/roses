@@ -19,7 +19,9 @@ module Scoring
   Score = Struct.new(:correct_picks, :tiebreaker)
 
   def compute_standings(entries)
-    ranked_correct_picks = entries.map {|_| Score.new(_.correct_picks, _.tiebreaker)}.uniq.sort {|x,y| [y.correct_picks, y.tiebreaker] <=> [x.correct_picks, x.tiebreaker]}
+    ranked_correct_picks = entries
+      .map {|_| Score.new(_.correct_picks, _.tiebreaker)}
+      .uniq.sort {|x,y| [y.correct_picks, y.tiebreaker] <=> [x.correct_picks, x.tiebreaker]}
 
     ranked_entries = entries.
       sort do |entry1, entry2|
@@ -32,6 +34,7 @@ module Scoring
 
     ranked_entries.each_with_index do |entry, index|
       entry.standing = ranked_correct_picks.index(Score.new(entry.correct_picks, entry.tiebreaker))+1
+      entry.score = Scoring::POINTS.fetch(entry.standing, 0) 
     end
   end
 

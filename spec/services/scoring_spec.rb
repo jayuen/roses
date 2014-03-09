@@ -106,5 +106,22 @@ describe "Services::Scoring" do
       first_tie.standing.should == 1
       third.standing.should == 2
     end
+
+    it "gives three points to first, two points to second, one point to third" do
+      first = WeeklyEntry.new(correct_picks: 3) 
+      second = WeeklyEntry.new(correct_picks: 2) 
+      third = WeeklyEntry.new(correct_picks: 1) 
+
+      Scoring.compute_standings([first, third, second])
+
+      first.score.should == 3
+      second.score.should == 2
+      third.score.should == 1
+    end
+  end
+
+  describe "scoring for final week" do
+    it "" do
+    end
   end
 end
