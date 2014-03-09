@@ -16,13 +16,59 @@ namespace :roses do
   end
 
   desc "provision a new week"
-  task :new_week, [:season_name, :name] => :environment do |t,args|
+  task :new_week, [:season_name, :name, :episode_type] => :environment do |t,args|
+    args.episode_type ||= Week::REGULAR
     season = Season.where(name: args.season_name).first
     Week.where(season_id: season.id).each do |w|
       w.update_attributes! locked: true
     end
-    week = Week.create! season_id: season.id, name: args.name, season_id: season.id, locked: false
+    week = Week.create! season_id: season.id, name: args.name, season_id: season.id, locked: false, episode_type: args.episode_type
     season.update_attributes! current_week_id: week.id
+  end
+
+  desc "generate final four week"
+  task :generate_final_four, [:season_name, :name] => :environment do |t,args|
+    Season.transaction do
+      season = Season.where(name: args.season_name).first
+      Week.where(season_id: season.id).each do |w|
+        w.update_attributes! locked: true
+      end
+      week = Week.create! season_id: season.id, name: args.name, season_id: season.id, locked: true, episode_type: Week::FINAL_FOUR
+      season.players.each do |player|
+        WeeklyEntryFactory.create_entry(player.id, week.id, [])
+      end
+      season.update_attributes! current_week_id: week.id
+    end
+  end
+
+  desc "generate final three week"
+  task :generate_final_three, [:season_name, :name] => :environment do |t,args|
+    Season.transaction do
+      season = Season.where(name: args.season_name).first
+      Week.where(season_id: season.id).each do |w|
+        w.update_attributes! locked: true
+      end
+      week = Week.create! season_id: season.id, name: args.name, season_id: season.id, locked: true, episode_type: Week::FINAL_THREE
+      season.players.each do |player|
+        WeeklyEntryFactory.create_entry(player.id, week.id, [])
+      end
+      season.update_attributes! current_week_id: week.id
+    end
+  end
+
+  desc "generate final two week"
+  task :generate_final_two, [:season_name, :name] => :environment do |t,args|
+    Season.transaction do
+      season = Season.where(name: args.season_name).first
+      Week.where(season_id: season.id).each do |w|
+        w.update_attributes! locked: true
+      end
+      week = Week.create! season_id: season.id, name: args.name, season_id: season.id, locked: true, episode_type: Week::FINAL_TWO
+      season.players.each do |player|
+        WeeklyEntryFactory.create_entry(player.id, week.id, [])
+      end
+      season.update_attributes! current_week_id: week.id
+    end
   end
 
   desc "provision a new admin"

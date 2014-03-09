@@ -13,6 +13,7 @@ angular.module('roses.controllers').
 
     $scope.sortedWeeks = function(weeklyEntries) {
       return _.sortBy(weeklyEntries, function(weeklyEntry) {
+        console.log(weeklyEntry)
         return weeklyEntry.week.name 
       })
     }
