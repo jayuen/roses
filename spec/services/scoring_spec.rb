@@ -121,14 +121,34 @@ describe "Services::Scoring" do
     end
   end
 
-  describe "scoring for final week" do
-    it "sets the score to the number of correct picks" do
+  describe "scoring for episode types" do
+    it "sets the score to the number of correct picks for a final week" do
       week = Week.new episode_type: Week::FINAL_FOUR
       entry = WeeklyEntry.new(correct_picks: 5, week: week) 
 
       Scoring.compute_standings([entry])
 
       entry.score.should == 5
+    end
+
+    it "sets the score based on the standing when final six week" do
+      week = Week.new episode_type: Week::FINAL_SIX
+      entry = WeeklyEntry.new(correct_picks: 5, week: week) 
+
+      Scoring.compute_standings([entry])
+
+      # 1st place * 3 points
+      entry.score.should == 3
+    end
+
+    it "sets the score based on the standing when regular week" do
+      week = Week.new episode_type: Week::REGULAR
+      entry = WeeklyEntry.new(correct_picks: 5, week: week) 
+
+      Scoring.compute_standings([entry])
+
+      # 1st place * 3 points
+      entry.score.should == 3
     end
   end
 end
