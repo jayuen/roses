@@ -44,6 +44,15 @@ describe "Services::Scoring" do
 
       weekly_entry.correct_picks.should == 1
     end
+
+    it "ignore picks that are invalid" do
+      weekly_entry.picks.build rose: true , contestant: sally
+      weekly_result = WeeklyResult.new rose: true, contestant: molly
+
+      Scoring.set_correct_picks(weekly_entry, [weekly_result])
+
+      weekly_entry.correct_picks.should == 0
+    end 
   end
 
   describe "set_final_rose_distance" do
