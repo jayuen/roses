@@ -28,8 +28,10 @@ class WeeklyEntryFactory
     final_regular_week = week.season.final_regular_week
     final_regular_entry = WeeklyEntry.where(player_id: player_id, week_id: final_regular_week.id).first
 
-    create_rose_picks entry, player_id, final_regular_entry, number_of_picks-1
-    entry.picks.create! player_id: player_id, contestant: final_regular_entry.nth_pick(number_of_picks).contestant, rose_order: number_of_picks, rose: false
+    if final_regular_entry
+      create_rose_picks entry, player_id, final_regular_entry, number_of_picks-1
+      entry.picks.create! player_id: player_id, contestant: final_regular_entry.nth_pick(number_of_picks).contestant, rose_order: number_of_picks, rose: false
+    end
   end
 
   def self.create_rose_picks entry, player_id, final_regular_entry, number_of_rose_picks
