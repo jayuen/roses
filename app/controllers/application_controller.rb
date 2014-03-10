@@ -36,7 +36,7 @@ class ApplicationController < ActionController::Base
   end
 
   class PlayerSerializer < ActiveModel::Serializer
-    attributes :name, :winner_name
+    attributes :name, :winner_name, :total_score
   end
 
   def standings

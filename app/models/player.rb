@@ -11,4 +11,8 @@ class Player < ActiveRecord::Base
   def winner_name
     winner.try(:name)
   end
+
+  def total_score
+    weekly_entries.sum(&:score)
+  end
 end

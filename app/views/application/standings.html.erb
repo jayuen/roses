@@ -15,11 +15,13 @@
       <tr>
         <th style="width:60px"/>
         <th style="width:60px">Winner pick</th>
+        <th style="width:60px">Total score</th>
         <th ng-repeat="week in weeks" style="width:60px">{{week.name}}</th>
       </tr>
       <tr ng-repeat="player in players">
         <td>{{player.name}}</td>
         <td>{{player.winner_name}}</td>
+        <td>{{player.total_score}}</td>
         <td 
           ng-class="{'gold': standing.standing == 1, 'silver': standing.standing == 2, 'bronze': standing.standing == 3}"
           ng-repeat="standing in playerStandings(player, standings)">{{standing.points}} pts (Rank: {{standing.standing}}, C: {{standing.correct_picks}})</td>
