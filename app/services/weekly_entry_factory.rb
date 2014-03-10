@@ -5,11 +5,11 @@ class WeeklyEntryFactory
     entry = WeeklyEntry.create! week_id: week_id, player_id: player_id, correct_picks: 0
 
     if week.final_four?
-      create_final_four_picks entry, player_id, week
+      create_final_picks entry, player_id, week, 4
     elsif week.final_three?
-      create_final_three_picks entry, player_id, week
+      create_final_picks entry, player_id, week, 3
     elsif week.final_two?
-      create_final_two_picks entry, player_id, week
+      create_final_picks entry, player_id, week, 2
     else
       create_regular_picks entry, player_id, contestants
     end
@@ -24,27 +24,18 @@ class WeeklyEntryFactory
     end
   end
 
-  def self.create_final_four_picks entry, player_id, week
-    final_six_week = week.season.final_six_week
-    final_six_entry = WeeklyEntry.where(week_id: final_six_week.id).first
-    entry.picks.create! player_id: player_id, contestant: final_six_entry.nth_pick(1).contestant, rose_order: 1, rose: true
-    entry.picks.create! player_id: player_id, contestant: final_six_entry.nth_pick(2).contestant, rose_order: 2, rose: true
-    entry.picks.create! player_id: player_id, contestant: final_six_entry.nth_pick(3).contestant, rose_order: 3, rose: true
-    entry.picks.create! player_id: player_id, contestant: final_six_entry.nth_pick(4).contestant, rose_order: 4, rose: false
+  def self.create_final_picks entry, player_id, week, number_of_picks
+    final_regular_week = week.season.final_regular_week
+    final_regular_entry = WeeklyEntry.where(player_id: player_id, week_id: final_regular_week.id).first
+
+    create_rose_picks entry, player_id, final_regular_entry, number_of_picks-1
+    entry.picks.create! player_id: player_id, contestant: final_regular_entry.nth_pick(number_of_picks).contestant, rose_order: number_of_picks, rose: false
   end
 
-  def self.create_final_three_picks entry, player_id, week
-    final_four_week = week.season.final_four_week
-    final_four_entry = WeeklyEntry.where(week_id: final_four_week.id).first
-    entry.picks.create! player_id: player_id, contestant: final_four_entry.nth_pick(1).contestant, rose_order: 1, rose: true
-    entry.picks.create! player_id: player_id, contestant: final_four_entry.nth_pick(2).contestant, rose_order: 2, rose: true
-    entry.picks.create! player_id: player_id, contestant: final_four_entry.nth_pick(3).contestant, rose_order: 3, rose: false
-  end
-
-  def self.create_final_two_picks entry, player_id, week
-    final_three_week = week.season.final_three_week
-    final_three_entry = WeeklyEntry.where(week_id: final_three_week.id).first
-    entry.picks.create! player_id: player_id, contestant: final_three_entry.nth_pick(1).contestant, rose_order: 1, rose: true
-    entry.picks.create! player_id: player_id, contestant: final_three_entry.nth_pick(2).contestant, rose_order: 2, rose: false
+  def self.create_rose_picks entry, player_id, final_regular_entry, number_of_rose_picks
+    (number_of_rose_picks).times do |i|
+      pick_order = i+1
+      entry.picks.create! player_id: player_id, contestant: final_regular_entry.nth_pick(pick_order).contestant, rose_order: pick_order, rose: true
+    end
   end
 end

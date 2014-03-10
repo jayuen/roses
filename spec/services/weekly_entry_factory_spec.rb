@@ -1,28 +1,30 @@
 require 'spec_helper.rb'
 
 describe WeeklyEntryFactory do
-  let(:player) {Player.create!}
+  let!(:player) {Player.create!}
+  let!(:season) {Season.create!}
+  let!(:final_six_week) {Week.create! season: season, episode_type: Week::FINAL_SIX}
   let(:sara) {Contestant.create!}
   let(:mary) {Contestant.create!}
   let(:heidi) {Contestant.create!}
   let(:kate) {Contestant.create!}
   let(:june) {Contestant.create!}
   let(:laura) {Contestant.create!}
-  let(:season) {Season.create!}
+  let!(:final_six_entry) do
+    entry = WeeklyEntry.create! week: final_six_week, player_id: player.id
+    entry.picks.create! player_id: player.id, contestant: sara, rose_order: 6  
+    entry.picks.create! player_id: player.id, contestant: mary, rose_order: 5  
+    entry.picks.create! player_id: player.id, contestant: heidi, rose_order: 4  
+    entry.picks.create! player_id: player.id, contestant: kate, rose_order: 3  
+    entry.picks.create! player_id: player.id, contestant: june, rose_order: 2  
+    entry.picks.create! player_id: player.id, contestant: laura, rose_order: 1  
+    entry
+  end
 
   describe "final four entry" do
     it "uses the top four picks from the final six week" do
-      final_six_week = Week.create! season: season, episode_type: Week::FINAL_SIX
-      entry = WeeklyEntry.create! week: final_six_week, player_id: player.id
-      entry.picks.create! player_id: player.id, contestant: sara, rose_order: 6  
-      entry.picks.create! player_id: player.id, contestant: mary, rose_order: 5  
-      entry.picks.create! player_id: player.id, contestant: heidi, rose_order: 4  
-      entry.picks.create! player_id: player.id, contestant: kate, rose_order: 3  
-      entry.picks.create! player_id: player.id, contestant: june, rose_order: 2  
-      entry.picks.create! player_id: player.id, contestant: laura, rose_order: 1  
-      
-      hometown_week = Week.create! season: season, episode_type: Week::FINAL_FOUR
-      new_entry = WeeklyEntryFactory.create_entry player.id, hometown_week.id, [] 
+      final_four_week = Week.create! season: season, episode_type: Week::FINAL_FOUR
+      new_entry = WeeklyEntryFactory.create_entry player.id, final_four_week.id, [] 
 
       expect(new_entry.picks.size).to eq(4)
       sorted = new_entry.picks.sort {|x,y| x.rose_order <=> y.rose_order}
@@ -41,16 +43,9 @@ describe WeeklyEntryFactory do
   end
 
   describe "final three entry" do
-    it "uses the top three picks from the final four week" do
-      final_four_week = Week.create! season: season, episode_type: Week::FINAL_FOUR
-      entry = WeeklyEntry.create! week: final_four_week, player_id: player.id
-      entry.picks.create! player_id: player.id, contestant: heidi, rose_order: 4  
-      entry.picks.create! player_id: player.id, contestant: kate, rose_order: 3  
-      entry.picks.create! player_id: player.id, contestant: june, rose_order: 2  
-      entry.picks.create! player_id: player.id, contestant: laura, rose_order: 1  
-      
-      hometown_week = Week.create! season: season, episode_type: Week::FINAL_THREE
-      new_entry = WeeklyEntryFactory.create_entry player.id, hometown_week.id, [] 
+    it "uses the top three picks from the final six week" do
+      final_three_week = Week.create! season: season, episode_type: Week::FINAL_THREE
+      new_entry = WeeklyEntryFactory.create_entry player.id, final_three_week.id, [] 
 
       expect(new_entry.picks.size).to eq(3)
       sorted = new_entry.picks.sort {|x,y| x.rose_order <=> y.rose_order}
@@ -67,14 +62,8 @@ describe WeeklyEntryFactory do
 
   describe "final two entry" do
     it "uses the top two picks from the final three week" do
-      final_three_week = Week.create! season: season, episode_type: Week::FINAL_THREE
-      entry = WeeklyEntry.create! week: final_three_week, player_id: player.id
-      entry.picks.create! player_id: player.id, contestant: kate, rose_order: 3  
-      entry.picks.create! player_id: player.id, contestant: june, rose_order: 2  
-      entry.picks.create! player_id: player.id, contestant: laura, rose_order: 1  
-      
-      hometown_week = Week.create! season: season, episode_type: Week::FINAL_TWO
-      new_entry = WeeklyEntryFactory.create_entry player.id, hometown_week.id, [] 
+      final_two_week = Week.create! season: season, episode_type: Week::FINAL_TWO
+      new_entry = WeeklyEntryFactory.create_entry player.id, final_two_week.id, [] 
 
       expect(new_entry.picks.size).to eq(2)
       sorted = new_entry.picks.sort {|x,y| x.rose_order <=> y.rose_order}
