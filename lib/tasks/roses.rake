@@ -15,6 +15,20 @@ namespace :roses do
     end
   end
 
+  desc "bootstrap Bachelorette Season 10"
+  task bootstrap_bachelorette_season_10: :environment do
+    season = Season.create! name: 'Bachelorette - Season 10', current: true
+    week = Week.create! season_id: season.id, name: '2014-05-19 (Week 1)', season_id: season.id, locked: false
+    season.update_attributes! current_week_id: week.id
+
+    ['Marcus', 'Chris', 'J.J.', 'Marquel', 'Tasos', 'Cody', 'Steven', 'Rudie', 'Carl', 
+      'Jason', 'Nick V', 'Dylan', 'Patrick', 'Emil', 'Brett', 'Craig', 'Ron', 'Bradley',
+      'Josh B', 'Nick S', 'Brian', 'Andrew', 'Mike', 'Eric', 'Josh M'
+    ].each do |name|
+      Contestant.create! name: name, season_id: season.id, eliminated: false
+    end
+  end
+
   desc "provision a new week"
   task :new_week, [:season_name, :name, :episode_type] => :environment do |t,args|
     args.episode_type ||= Week::REGULAR
